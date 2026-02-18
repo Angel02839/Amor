@@ -81,10 +81,11 @@ button:hover{
   line-height:1.6;
 }
 
+/* FLORES - ROSAS COMPLETAS */
 .flower{
   position:absolute;
-  width:14px;
-  height:40px;
+  width:20px;
+  height:60px;
   animation:wind 4s ease-in-out infinite alternate;
 }
 
@@ -96,8 +97,8 @@ button:hover{
   left:50%;
   transform:translateX(-50%);
   width:4px;
-  height:28px;
-  background:linear-gradient(to bottom,#1f7a1f,#0d3d0d);
+  height:40px;
+  background:linear-gradient(to bottom,#2e8b57,#0f3d1f);
   border-radius:2px;
 }
 
@@ -108,15 +109,37 @@ button:hover{
   top:0;
   left:50%;
   transform:translateX(-50%);
-  width:16px;
-  height:16px;
-  background:
-    radial-gradient(circle at 50% 50%, #ff1a1a 20%, #b30000 60%, #600000 100%);
+  width:18px;
+  height:18px;
   border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 50%, #ff4d4d 15%, #b30000 50%, #5a0000 100%);
   box-shadow:
-    -6px 0 0 0 #b30000,
-    6px 0 0 0 #b30000,
-    0 -6px 0 0 #b30000;
+    -8px 0 0 #b30000,
+    8px 0 0 #b30000,
+    0 -8px 0 #b30000,
+    -6px -6px 0 #8b0000,
+    6px -6px 0 #8b0000;
+}
+
+/* HOJAS */
+.flower span{
+  position:absolute;
+  bottom:25px;
+  width:10px;
+  height:6px;
+  background:#1f7a1f;
+  border-radius:50%;
+}
+
+.flower span.left{
+  left:-6px;
+  transform:rotate(-30deg);
+}
+
+.flower span.right{
+  right:-6px;
+  transform:rotate(30deg);
 }
 
 @keyframes wind{
@@ -180,7 +203,7 @@ button:hover{
 
 /* REGALO */
 .gift-container{
-  margin-top:80px; /* antes 30px */
+  margin-top:80px;
 }
 
 .gift{
@@ -247,195 +270,21 @@ button:hover{
   font-size:1.2rem;
   color:var(--gold);
 }
-
-/* GALERÍA EDITABLE */
-.gallery{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:20px;
-}
-
-.gallery img{
-  width:100%;
-  border:2px solid var(--gold);
-  border-radius:12px;
-  cursor:pointer;
-  transition:transform 0.3s;
-}
-
-.gallery img:hover{
-  transform:scale(1.05);
-}
-
-#modal{
-  display:none;
-  position:fixed;
-  top:0;left:0;
-  width:100%;height:100%;
-  background:rgba(0,0,0,0.9);
-  justify-content:center;
-  align-items:center;
-}
-
-#modal img{
-  max-width:90%;
-  border:3px solid var(--gold);
-  border-radius:10px;
-}
 </style>
 </head>
 <body>
 
 <canvas id="stars"></canvas>
 
-<section id="home" class="active">
-<h1>Feliz Cumpleaños ♡</h1>
-<button onclick="showSection('fecha')">Fecha</button>
-<button onclick="showSection('regalo')">Regalo</button>
-<button onclick="showSection('recuerdos')">Recuerdos</button>
-</section>
-
-<section id="fecha">
+<section id="fecha" class="active">
 <h1>Nuestra Historia</h1>
 <div id="contador"></div>
 <p>Desde el 16 de octubre a las 6:55 PM comenzó todo.</p>
 <div id="campoFlores"></div>
-<button onclick="showSection('home')">Volver</button>
 </section>
-
-<section id="regalo">
-<h1>Una Carta Para Ti</h1>
-
-<div class="envelope-container">
-  <div class="envelope" id="envelope">
-    <div class="envelope-body"></div>
-    <div class="envelope-flap"></div>
-  </div>
-</div>
-
-<div class="letter" id="letter">
-Hoy cumples un año más y yo sigo sintiendo lo mismo que el primer día, pero más fuerte y más real.  
-Tu sonrisa se convirtió en mi lugar seguro.  
-Gracias por existir, por quedarte y por hacer mi mundo mejor.  
-Quiero seguir celebrando cada momento contigo. ♡  
-<br><br>
-(Toca esta carta para cerrarla y ver tu regalo)
-</div>
-
-<div class="gift-container">
-  <div class="gift" id="gift">
-    <div class="gift-box"></div>
-    <div class="ribbon-vertical"></div>
-    <div class="ribbon-horizontal"></div>
-    <div class="gift-lid"></div>
-  </div>
-  <div id="giftContent">ROBUX-XXXX-XXXX</div>
-</div>
-
-<button onclick="showSection('home')">Volver</button>
-</section>
-
-<!-- SECCIÓN EDITABLE -->
-<section id="recuerdos">
-  <h2>Recuerdos</h2>
-
-  <div class="gallery">
-    <!-- Cambia estas imágenes por las tuyas -->
-    <img src="Meee.jpeg" onclick="openModal(this.src)">
-    <img src="quieres ser mi novia.jpeg" onclick="openModal(this.src)">
-  </div>
-
-  <button onclick="showSection('home')">Volver</button>
-</section>
-
-<div id="modal" onclick="closeModal()">
-<img id="modalImg">
-</div>
 
 <script>
-function showSection(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
-}
-
-/* SOBRE */
-const envelope=document.getElementById("envelope");
-const letter=document.getElementById("letter");
-const gift=document.getElementById("gift");
-const giftContent=document.getElementById("giftContent");
-
-envelope.addEventListener("click",()=>{
-  envelope.classList.add("open");
-  setTimeout(()=>{ letter.style.display="block"; },600);
-});
-
-letter.addEventListener("click",()=>{
-  letter.style.display="none";
-  gift.classList.add("unlocked");
-});
-
-gift.addEventListener("click",()=>{
-  if(!gift.classList.contains("unlocked")) return;
-  gift.classList.add("open");
-  giftContent.style.display="block";
-});
-
-/* MODAL */
-function openModal(src){
-  document.getElementById("modal").style.display="flex";
-  document.getElementById("modalImg").src=src;
-}
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
-
-/* ESTRELLAS */
-const canvas=document.getElementById("stars");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let stars=[];
-for(let i=0;i<100;i++){
-  stars.push({x:Math.random()*canvas.width,
-              y:Math.random()*canvas.height,
-              r:Math.random()*1.5});
-}
-
-function drawStars(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle="white";
-  stars.forEach(s=>{
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fill();
-  });
-}
-setInterval(drawStars,100);
-
-/* CONTADOR */
 const startDate = new Date("2025-12-24T18:32:00-07:00");
-function updateCounter(){
-  const now=new Date();
-  let diff=now-startDate;
-  let future=diff<0;
-  diff=Math.abs(diff);
-
-  const years=Math.floor(diff/(1000*60*60*24*365));
-  const months=Math.floor(diff/(1000*60*60*24*30))%12;
-  const days=Math.floor(diff/(1000*60*60*24))%30;
-  const hours=Math.floor(diff/(1000*60*60))%24;
-  const minutes=Math.floor(diff/(1000*60))%60;
-  const seconds=Math.floor(diff/1000)%60;
-
-  document.getElementById("contador").innerHTML=
-    (future?"Faltan:<br>":"Han pasado:<br>")+
-    years+" años "+months+" meses "+days+" días<br>"+
-    hours+" horas "+minutes+" minutos "+seconds+" segundos";
-}
-setInterval(updateCounter,1000);
-updateCounter();
 
 /* FLORES */
 function generarFlores(){
@@ -447,6 +296,15 @@ function generarFlores(){
   for(let i=0;i<total;i++){
     const f=document.createElement("div");
     f.className="flower";
+
+    const leafL=document.createElement("span");
+    leafL.className="left";
+    f.appendChild(leafL);
+
+    const leafR=document.createElement("span");
+    leafR.className="right";
+    f.appendChild(leafR);
+
     f.style.left=Math.random()*100+"%";
     f.style.bottom=Math.random()*50+"px";
     f.style.animationDuration=(3+Math.random()*3)+"s";
