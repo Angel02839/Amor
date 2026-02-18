@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feliz Cumpleaños 💖</title>
+<title>Feliz Cumpleaños 💖🌹</title>
 
 <style>
 body {
@@ -77,6 +77,12 @@ button:hover {
   width: 200px;
   margin: 10px;
   border: 2px solid gold;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
 }
 </style>
 </head>
@@ -87,7 +93,7 @@ button:hover {
 
 <section id="home" class="active">
   <h1>Feliz cumpleaños 💖🌹</h1>
-  <p>Para la persona que cambió mi 2025 y 2026.</p>
+  <p>Para la persona que cambió mi 2025 y mi forma de sentir.</p>
   <button onclick="showSection('historia')">📅 Tiempo</button>
   <button onclick="showSection('regalo')">🎁 Tu Regalo</button>
   <button onclick="showSection('recuerdos')">📸 Recuerdos</button>
@@ -104,22 +110,21 @@ button:hover {
 
 <section id="regalo">
   <h2>Tu Regalo 💖🌹</h2>
-  <p>
+  <p style="max-width:500px;">
     Gracias por llegar a mi vida y cambiarla completamente.  
-    Eres mi mejor decisión y quiero seguir creando recuerdos contigo.
-    Te Amo mucho Cariño.
+    Eres mi mejor decisión y quiero seguir creando recuerdos contigo.  
+    No solo celebro tu cumpleaños… celebro el día en que existes.
   </p>
   <button onclick="mostrarCodigo()">Abrir regalo 🎀</button>
-  <p id="codigo" style="margin-top:20px; font-size:20px; color:gold;"></p>
+  <p id="codigo" style="margin-top:20px; font-size:20px; color:gold; border:1px solid gold; padding:10px; display:inline-block;"></p>
   <button onclick="showSection('home')">Volver</button>
 </section>
 
 <section id="recuerdos">
   <h2>Recuerdos</h2>
   <div class="gallery">
-    <!-- Cambia estas imágenes por las tuyas -->
-    <img src="quieres ser mi novia.jpg">
-    <img src="meee.jpg">
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
   </div>
   <button onclick="showSection('home')">Volver</button>
 </section>
@@ -154,10 +159,9 @@ setInterval(updateCounter, 1000);
 updateCounter();
 
 function mostrarCodigo() {
-  document.getElementById("codigo").textContent = "TU-CODIGO-ROBLOX-AQUI";
+  document.getElementById("codigo").textContent = "AQUI-VA-TU-CODIGO-REAL";
 }
 
-// Estrellas
 for (let i = 0; i < 100; i++) {
   let star = document.createElement("div");
   star.className = "star";
@@ -170,3 +174,4 @@ for (let i = 0; i < 100; i++) {
 
 </body>
 </html>
+
