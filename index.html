@@ -81,46 +81,42 @@ button:hover{
   line-height:1.6;
 }
 
-/* FLORES */
-#campoFlores{
-  position:absolute;
-  bottom:0;
-  left:0;
-  width:100%;
-  height:200px;
-  overflow:hidden;
-}
-
 .flower{
   position:absolute;
-  width:22px;
-  height:22px;
+  width:14px;
+  height:40px;
   animation:wind 4s ease-in-out infinite alternate;
 }
 
+/* TALLO */
 .flower::before{
   content:"";
   position:absolute;
-  width:22px;
-  height:22px;
-  background:
-    radial-gradient(circle at 50% 0%, #b30000 40%, transparent 41%),
-    radial-gradient(circle at 100% 50%, #b30000 40%, transparent 41%),
-    radial-gradient(circle at 50% 100%, #b30000 40%, transparent 41%),
-    radial-gradient(circle at 0% 50%, #b30000 40%, transparent 41%);
-  background-repeat:no-repeat;
-  background-size:50% 50%;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:4px;
+  height:28px;
+  background:linear-gradient(to bottom,#1f7a1f,#0d3d0d);
+  border-radius:2px;
 }
 
+/* ROSA */
 .flower::after{
   content:"";
   position:absolute;
-  top:6px;
-  left:6px;
-  width:10px;
-  height:10px;
-  background:var(--gold);
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:16px;
+  height:16px;
+  background:
+    radial-gradient(circle at 50% 50%, #ff1a1a 20%, #b30000 60%, #600000 100%);
   border-radius:50%;
+  box-shadow:
+    -6px 0 0 0 #b30000,
+    6px 0 0 0 #b30000,
+    0 -6px 0 0 #b30000;
 }
 
 @keyframes wind{
