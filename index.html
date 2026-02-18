@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Cumpleaños 🖤</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  color: white;
+  overflow-x: hidden;
+}
+
+h1, h2 {
+  color: gold;
+}
+
+section {
+  min-height: 100vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+section.active {
+  display: flex;
+  opacity: 1;
+}
+
+button {
+  background: transparent;
+  border: 2px solid gold;
+  color: gold;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: gold;
+  color: black;
+}
+
+#stars {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: gold;
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%,100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+.gallery img {
+  width: 200px;
+  margin: 10px;
+  border: 2px solid gold;
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<section id="home" class="active">
+  <h1>Feliz cumpleaños 🖤</h1>
+  <p>Para la persona que cambió mi 2025.</p>
+  <button onclick="showSection('historia')">📅 Nuestra Historia</button>
+  <button onclick="showSection('regalo')">🎁 Tu Regalo</button>
+  <button onclick="showSection('recuerdos')">📸 Recuerdos</button>
+</section>
+
+<section id="historia">
+  <h2>Nuestra Historia</h2>
+  <p>💞 Tiempo juntos:</p>
+  <p id="relacion"></p>
+  <p>💬 Desde que te hablé:</p>
+  <p id="conocimos"></p>
+  <button onclick="showSection('home')">Volver</button>
+</section>
+
+<section id="regalo">
+  <h2>Tu Regalo 🖤</h2>
+  <p>
+    Gracias por llegar a mi vida y cambiarla completamente.  
+    Eres mi mejor decisión y quiero seguir creando recuerdos contigo.
+  </p>
+  <button onclick="mostrarCodigo()">Abrir regalo 🎀</button>
+  <p id="codigo" style="margin-top:20px; font-size:20px; color:gold;"></p>
+  <button onclick="showSection('home')">Volver</button>
+</section>
+
+<section id="recuerdos">
+  <h2>Recuerdos</h2>
+  <div class="gallery">
+    <!-- Cambia estas imágenes por las tuyas -->
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+  </div>
+  <button onclick="showSection('home')">Volver</button>
+</section>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll("section").forEach(sec => {
+    sec.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+}
+
+function updateCounter() {
+  const inicioRelacion = new Date("2025-12-24T18:32:00");
+  const inicioChat = new Date("2025-10-16T18:55:00");
+  const ahora = new Date();
+
+  function calcular(inicio) {
+    const diff = ahora - inicio;
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
+    const minutos = Math.floor(diff / (1000 * 60)) % 60;
+    const segundos = Math.floor(diff / 1000) % 60;
+    return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+  }
+
+  document.getElementById("relacion").textContent = calcular(inicioRelacion);
+  document.getElementById("conocimos").textContent = calcular(inicioChat);
+}
+
+setInterval(updateCounter, 1000);
+updateCounter();
+
+function mostrarCodigo() {
+  document.getElementById("codigo").textContent = "TU-CODIGO-ROBLOX-AQUI";
+}
+
+// Estrellas
+for (let i = 0; i < 100; i++) {
+  let star = document.createElement("div");
+  star.className = "star";
+  star.style.top = Math.random() * 100 + "vh";
+  star.style.left = Math.random() * 100 + "vw";
+  star.style.animationDuration = (Math.random() * 3 + 2) + "s";
+  document.getElementById("stars").appendChild(star);
+}
+</script>
+
+</body>
+</html>
