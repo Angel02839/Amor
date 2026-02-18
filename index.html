@@ -93,33 +93,33 @@ button:hover{
 
 .flower{
   position:absolute;
-  width:20px;
-  height:20px;
+  width:22px;
+  height:22px;
   animation:wind 4s ease-in-out infinite alternate;
 }
 
-.flower::before,
+.flower::before{
+  content:"";
+  position:absolute;
+  width:22px;
+  height:22px;
+  background:
+    radial-gradient(circle at 50% 0%, #b30000 40%, transparent 41%),
+    radial-gradient(circle at 100% 50%, #b30000 40%, transparent 41%),
+    radial-gradient(circle at 50% 100%, #b30000 40%, transparent 41%),
+    radial-gradient(circle at 0% 50%, #b30000 40%, transparent 41%);
+  background-repeat:no-repeat;
+  background-size:50% 50%;
+}
+
 .flower::after{
   content:"";
   position:absolute;
-  width:20px;
-  height:20px;
-  background:radial-gradient(circle at center, #b30000 40%, #5a0000 80%);
-  border-radius:50%;
-}
-
-.flower::before{
-  top:-8px;
-  left:0;
-}
-
-.flower::after{
-  top:0;
-  left:-8px;
-}
-
-.flower{
-  background:radial-gradient(circle at center, var(--gold) 25%, var(--red) 60%);
+  top:6px;
+  left:6px;
+  width:10px;
+  height:10px;
+  background:var(--gold);
   border-radius:50%;
 }
 
