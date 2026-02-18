@@ -93,11 +93,34 @@ button:hover{
 
 .flower{
   position:absolute;
-  width:18px;
-  height:18px;
-  background:radial-gradient(circle,var(--red) 40%,#5a0000);
-  border-radius:50%;
+  width:20px;
+  height:20px;
   animation:wind 4s ease-in-out infinite alternate;
+}
+
+.flower::before,
+.flower::after{
+  content:"";
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:radial-gradient(circle at center, #b30000 40%, #5a0000 80%);
+  border-radius:50%;
+}
+
+.flower::before{
+  top:-8px;
+  left:0;
+}
+
+.flower::after{
+  top:0;
+  left:-8px;
+}
+
+.flower{
+  background:radial-gradient(circle at center, var(--gold) 25%, var(--red) 60%);
+  border-radius:50%;
 }
 
 @keyframes wind{
@@ -161,7 +184,7 @@ button:hover{
 
 /* REGALO */
 .gift-container{
-  margin-top:30px;
+  margin-top:80px; /* antes 30px */
 }
 
 .gift{
