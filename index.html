@@ -3,24 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feliz Cumpleaños ♡</title>
+<title>Nuestra Historia ♡</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --gold:#d4af37;
-  --black:#000;
+  --deep:#0d0d0d;
   --red:#8b0000;
-  --dark-red:#4a0000;
-  --paper:#f5e6c8;
+  --pink:#ff4d6d;
 }
 
-/* RESET */
-*{box-sizing:border-box;margin:0;padding:0}
+*{margin:0;padding:0;box-sizing:border-box}
 
 body{
-  background:var(--black);
+  background:var(--deep);
   color:white;
   font-family:'Cinzel',serif;
   overflow-x:hidden;
@@ -29,88 +27,89 @@ body{
 section{
   min-height:100vh;
   display:none;
-  padding:40px 20px;
+  padding:60px 20px;
   text-align:center;
   position:relative;
-  animation:fade 0.8s ease;
 }
-section.active{display:block}
+section.active{display:block;animation:fadeIn 1s ease;}
 
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px)}
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(30px)}
   to{opacity:1;transform:translateY(0)}
 }
 
-h1,h2{
+h1{
   font-family:'Great Vibes',cursive;
-  font-size:2.8rem;
-  margin-bottom:25px;
+  font-size:3rem;
+  margin-bottom:30px;
   color:var(--gold);
 }
 
 button{
-  background:transparent;
-  border:2px solid var(--gold);
-  color:var(--gold);
+  margin-top:30px;
   padding:12px 25px;
-  margin:15px 10px 0;
   border-radius:30px;
-  font-size:1rem;
-  transition:.3s;
+  border:2px solid var(--gold);
+  background:transparent;
+  color:var(--gold);
+  transition:.4s;
 }
 button:hover{
   background:var(--gold);
   color:black;
 }
 
-/* ESTRELLAS */
-#stars{
+/* 🌌 ESTRELLAS */
+canvas{
   position:fixed;
   inset:0;
-  width:100%;
-  height:100%;
   z-index:-1;
 }
 
-/* ===== NUEVO CONTADOR ESTILO CAJAS ===== */
-.timer-title{
-  margin:20px 0;
-  font-size:1.2rem;
-  color:var(--gold);
-}
+/* ================= FECHA ================= */
 
 .timer-container{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
-  gap:15px;
-  margin-top:15px;
+  gap:20px;
 }
 
 .time-box{
-  background:rgba(212,175,55,0.1);
-  padding:15px;
-  border-radius:15px;
-  width:90px;
+  background:rgba(255,255,255,0.05);
   border:1px solid var(--gold);
+  padding:20px;
+  width:100px;
+  border-radius:20px;
+  backdrop-filter:blur(5px);
 }
 
 .time-number{
-  font-size:22px;
+  font-size:26px;
   font-weight:bold;
   color:var(--gold);
+  transition:.3s;
 }
 
 .time-label{
-  font-size:13px;
+  font-size:14px;
+  margin-top:5px;
 }
 
-/* FLORES */
+/* 🌹 FLORES */
+#flores{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:120px;
+}
+
 .flower{
   position:absolute;
-  width:20px;
+  bottom:0;
+  width:18px;
   height:50px;
-  animation:wind 5s ease-in-out infinite alternate;
+  animation:move 4s ease-in-out infinite alternate;
 }
 .flower::before{
   content:"";
@@ -118,9 +117,9 @@ button:hover{
   bottom:0;
   left:50%;
   transform:translateX(-50%);
-  width:5px;
+  width:4px;
   height:35px;
-  background:linear-gradient(to bottom,#2ecc71,#145a32);
+  background:linear-gradient(#2ecc71,#145a32);
 }
 .flower::after{
   content:"";
@@ -128,168 +127,301 @@ button:hover{
   top:0;
   left:50%;
   transform:translateX(-50%);
-  width:20px;
-  height:20px;
-  background:radial-gradient(circle,#ff4d6d,#8b0000);
+  width:18px;
+  height:18px;
+  background:radial-gradient(circle,var(--pink),var(--red));
   border-radius:50%;
 }
-@keyframes wind{
-  from{transform:rotate(-3deg)}
-  to{transform:rotate(5deg)}
+@keyframes move{
+  from{transform:rotate(-4deg)}
+  to{transform:rotate(4deg)}
 }
 
-/* SOBRE */
-.envelope-container{perspective:1000px;margin-top:30px;}
-.envelope{width:220px;height:140px;margin:auto;position:relative;cursor:pointer;}
-.envelope-body{
-  width:100%;height:100%;
-  background:linear-gradient(135deg,var(--dark-red),var(--red));
-  border:2px solid var(--gold);
-  border-radius:8px;
+/* ================= REGALO ================= */
+
+.gift{
+  width:180px;
+  height:180px;
+  margin:auto;
+  position:relative;
+  cursor:pointer;
+  transition:.5s;
+}
+
+.box{
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg,#b8860b,var(--gold));
+  border-radius:15px;
   position:absolute;
 }
-.envelope-flap{
-  width:100%;height:70px;
-  background:linear-gradient(135deg,var(--red),var(--dark-red));
-  position:absolute;top:0;
-  clip-path:polygon(0 0,100% 0,50% 100%);
-  transform-origin:top;
+
+.lid{
+  width:100%;
+  height:50px;
+  background:linear-gradient(135deg,#b8860b,var(--gold));
+  border-radius:15px 15px 0 0;
+  position:absolute;
+  top:-50px;
   transition:.6s;
 }
-.envelope.open .envelope-flap{transform:rotateX(180deg);}
+
+.ribbonV{
+  width:25px;
+  height:100%;
+  background:var(--red);
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.ribbonH{
+  width:100%;
+  height:25px;
+  background:var(--red);
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.gift.open .lid{
+  transform:translateY(-70px) rotate(-15deg);
+}
+
+#giftMessage{
+  display:none;
+  margin-top:30px;
+  font-family:'Great Vibes',cursive;
+  font-size:1.8rem;
+  color:var(--gold);
+}
+
+/* ================= CARTA ================= */
 
 .letter{
-  width:90%;max-width:500px;margin:30px auto;
-  background:var(--paper);color:#3a2a1a;
-  padding:25px;border-radius:8px;
+  max-width:500px;
+  margin:auto;
+  background:white;
+  color:black;
+  padding:30px;
+  border-radius:15px;
   font-family:'Great Vibes',cursive;
-  font-size:1.4rem;
-  line-height:1.5;
-  display:none;
-  box-shadow:0 0 25px rgba(212,175,55,.4);
+  font-size:1.5rem;
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
+  animation:float 4s ease-in-out infinite alternate;
 }
 
-/* REGALO */
-.gift-container{margin-top:80px;}
-.gift{width:160px;height:160px;margin:auto;position:relative;cursor:not-allowed;opacity:.5;transition:.4s;}
-.gift.unlocked{cursor:pointer;opacity:1;}
-.gift-box{
-  width:100%;height:100%;
-  background:linear-gradient(135deg,#b8860b,var(--gold));
-  border:3px solid var(--red);
-  border-radius:10px;
-  position:absolute;
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-10px)}
 }
-.ribbon-vertical{width:20px;height:100%;background:var(--red);position:absolute;left:50%;transform:translateX(-50%);}
-.ribbon-horizontal{width:100%;height:20px;background:var(--red);position:absolute;top:50%;transform:translateY(-50%);}
-.gift-lid{
-  width:100%;height:40px;
-  background:linear-gradient(135deg,#b8860b,var(--gold));
-  border:3px solid var(--red);
-  border-radius:10px 10px 0 0;
-  position:absolute;top:-40px;
-  transition:.6s;
-}
-.gift.open .gift-lid{transform:translateY(-60px) rotate(-10deg);}
-#giftContent{display:none;margin-top:20px;font-size:1.2rem;color:var(--gold);}
 
-/* GALERÍA */
-.gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;}
+/* ================= RECUERDOS ================= */
+
+.gallery{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  flex-wrap:wrap;
+}
+
 .gallery img{
-  width:100%;border:2px solid var(--gold);
-  border-radius:12px;cursor:pointer;transition:.3s;
+  width:250px;
+  border-radius:15px;
+  border:2px solid var(--gold);
+  transition:.4s;
 }
-.gallery img:hover{transform:scale(1.05);}
-#modal{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.9);
-  justify-content:center;align-items:center;
+.gallery img:hover{
+  transform:scale(1.1);
 }
-#modal img{max-width:90%;border:3px solid var(--gold);border-radius:10px;}
 
+/* MODAL */
+#modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  justify-content:center;
+  align-items:center;
+}
+#modal img{
+  max-width:90%;
+  border:3px solid var(--gold);
+  border-radius:15px;
+}
 </style>
 </head>
+
 <body>
 
 <canvas id="stars"></canvas>
 
 <section id="home" class="active">
-<h1>Feliz Cumpleaños ♡</h1>
-<button onclick="showSection('fecha')">Fecha</button>
-<button onclick="showSection('regalo')">Regalo</button>
-<button onclick="showSection('recuerdos')">Recuerdos</button>
+<h1>Nuestra Historia ♡</h1>
+<button onclick="go('fecha')">Fecha</button>
+<button onclick="go('regalo')">Regalo</button>
+<button onclick="go('carta')">Carta</button>
+<button onclick="go('recuerdos')">Recuerdos</button>
 </section>
 
+<!-- FECHA -->
 <section id="fecha">
-<h1>Nuestra Historia</h1>
-
-<div class="timer-title">Nuestro amor comenzó hace:</div>
+<h1>Desde que empezó todo</h1>
 
 <div class="timer-container">
-  <div class="time-box">
-    <div class="time-number" id="years">0</div>
-    <div class="time-label">Años</div>
-  </div>
-  <div class="time-box">
-    <div class="time-number" id="months">0</div>
-    <div class="time-label">Meses</div>
-  </div>
-  <div class="time-box">
-    <div class="time-number" id="days">0</div>
-    <div class="time-label">Días</div>
-  </div>
-  <div class="time-box">
-    <div class="time-number" id="hours">0</div>
-    <div class="time-label">Horas</div>
-  </div>
-  <div class="time-box">
-    <div class="time-number" id="minutes">0</div>
-    <div class="time-label">Min</div>
-  </div>
-  <div class="time-box">
-    <div class="time-number" id="seconds">0</div>
-    <div class="time-label">Seg</div>
-  </div>
+<div class="time-box"><div id="years" class="time-number">0</div><div class="time-label">Años</div></div>
+<div class="time-box"><div id="months" class="time-number">0</div><div class="time-label">Meses</div></div>
+<div class="time-box"><div id="days" class="time-number">0</div><div class="time-label">Días</div></div>
+<div class="time-box"><div id="hours" class="time-number">0</div><div class="time-label">Horas</div></div>
+<div class="time-box"><div id="minutes" class="time-number">0</div><div class="time-label">Min</div></div>
+<div class="time-box"><div id="seconds" class="time-number">0</div><div class="time-label">Seg</div></div>
 </div>
 
-<div id="campoFlores"></div>
-<button onclick="showSection('home')">Volver</button>
+<div id="flores"></div>
+<button onclick="go('home')">Volver</button>
 </section>
 
-<!-- RESTO IGUAL (Carta, regalo, recuerdos) -->
-<!-- No se tocó nada de esa parte -->
+<!-- REGALO -->
+<section id="regalo">
+<h1>Tu Regalo ♡</h1>
+
+<div class="gift" onclick="openGift(this)">
+<div class="lid"></div>
+<div class="box"></div>
+<div class="ribbonV"></div>
+<div class="ribbonH"></div>
+</div>
+
+<div id="giftMessage">
+Eres el mejor regalo que la vida me dio ♡
+</div>
+
+<button onclick="go('home')">Volver</button>
+</section>
+
+<!-- CARTA -->
+<section id="carta">
+<h1>Una Carta Para Ti ♡</h1>
+
+<div class="letter">
+<!-- ✏️ CAMBIA ESTE TEXTO POR LO QUE QUIERAS -->
+Mi niña hermosa,
+
+No sé cómo empezar esto sin que suene simple, porque lo que siento por ti no es simple. Desde que llegaste a mi vida algo cambió en mí. No fue de golpe, fue poco a poco… pero ahora no imagino mis días sin hablar contigo.
+
+Me haces feliz de una forma que no sabía que existía. A veces estoy tranquilo y de la nada sonrío porque recuerdo algo que me dijiste. Y eso significa más de lo que imaginas.
+
+Gracias por elegirme. De verdad. Entre tantas personas, me elegiste a mí. Y eso lo valoro muchísimo.
+
+Cuando digo que quiero durar contigo, no lo digo por decirlo. Lo digo porque contigo me siento en paz, me siento querido, me siento suficiente. Y eso no se encuentra todos los días.
+
+Me ilusiona pensar en el día que podamos vernos en persona, abrazarte fuerte y decirte todo esto mirándote a los ojos. Me ilusiona imaginar un futuro donde sigamos creciendo juntos, apoyándonos, riéndonos, cumpliendo metas.
+
+No soy perfecto, pero quiero ser mejor cada día, también por ti.
+
+Y quiero que sepas algo claro:
+yo te elijo.
+Te elijo todos los días.
+Te elijo incluso cuando el mundo se pone difícil.
+Porque si estar contigo significa cuidar lo que tenemos y construir algo bonito juntos, entonces vale la pena.
+
+No eres una parte pequeña de mi vida.
+Eres una de las razones por las que sonrío todos los días.
+
+Te amo. Y no como palabra bonita. Te amo de verdad.
+
+El que siempre te elige.
+</div>
+
+<button onclick="go('home')">Volver</button>
+</section>
+
+<!-- RECUERDOS -->
+<section id="recuerdos">
+<h1>Nuestros Recuerdos ♡</h1>
+
+<div class="gallery">
+<img src="Meee.jpeg" onclick="openModal(this.src)">
+<img src="quieres ser mi novia.jpeg" onclick="openModal(this.src)">
+</div>
+
+<button onclick="go('home')">Volver</button>
+</section>
+
+<div id="modal" onclick="closeModal()">
+<img id="modalImg">
+</div>
 
 <script>
 
-/* CAMBIO DE SECCIÓN */
-function showSection(id){
-  document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
-  document.getElementById(id).classList.add("active");
+/* Navegación */
+function go(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
 
-/* CONTADOR NUEVO */
-const startDate = new Date("2025-12-24T18:32:00-07:00");
+/* Contador */
+const startDate=new Date("2025-12-24T18:32:00-07:00");
 
-function updateCounter(){
-  const now=new Date();
-  let diff=Math.abs(now-startDate);
+function update(){
+const now=new Date();
+let diff=Math.abs(now-startDate);
 
-  const years=Math.floor(diff/(1000*60*60*24*365));
-  const months=Math.floor(diff/(1000*60*60*24*30))%12;
-  const days=Math.floor(diff/(1000*60*60*24))%30;
-  const hours=Math.floor(diff/(1000*60*60))%24;
-  const minutes=Math.floor(diff/(1000*60))%60;
-  const seconds=Math.floor(diff/1000)%60;
-
-  document.getElementById("years").innerText=years;
-  document.getElementById("months").innerText=months;
-  document.getElementById("days").innerText=days;
-  document.getElementById("hours").innerText=hours;
-  document.getElementById("minutes").innerText=minutes;
-  document.getElementById("seconds").innerText=seconds;
+years.innerText=Math.floor(diff/(1000*60*60*24*365));
+months.innerText=Math.floor(diff/(1000*60*60*24*30))%12;
+days.innerText=Math.floor(diff/(1000*60*60*24))%30;
+hours.innerText=Math.floor(diff/(1000*60*60))%24;
+minutes.innerText=Math.floor(diff/(1000*60))%60;
+seconds.innerText=Math.floor(diff/1000)%60;
 }
-setInterval(updateCounter,1000);
-updateCounter();
+setInterval(update,1000);
+update();
+
+/* Flores */
+for(let i=0;i<20;i++){
+let f=document.createElement("div");
+f.className="flower";
+f.style.left=Math.random()*100+"%";
+flores.appendChild(f);
+}
+
+/* Regalo */
+function openGift(el){
+el.classList.toggle("open");
+giftMessage.style.display="block";
+}
+
+/* Modal */
+function openModal(src){
+modal.style.display="flex";
+modalImg.src=src;
+}
+function closeModal(){
+modal.style.display="none";
+}
+
+/* Estrellas */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<150;i++){
+stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2});
+}
+
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="white";
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fill();
+});
+requestAnimationFrame(draw);
+}
+draw();
 
 </script>
 </body>
