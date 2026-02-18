@@ -3,175 +3,265 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Feliz Cumpleaños 💖🌹</title>
+<title>Nuestra Constelación</title>
 
 <style>
 body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background: black;
-  color: white;
-  overflow-x: hidden;
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    background: black;
 }
 
-h1, h2 {
-  color: gold;
+/* Pantalla inicial */
+#intro {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #0d1b2a, #000);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    transition: opacity 1s ease;
+    z-index: 20;
 }
 
-section {
-  min-height: 100vh;
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 20px;
-  opacity: 0;
-  transition: opacity 0.8s ease;
+#intro h1 {
+    font-weight: 300;
+    letter-spacing: 2px;
 }
 
-section.active {
-  display: flex;
-  opacity: 1;
+#enterBtn {
+    margin-top: 30px;
+    padding: 12px 30px;
+    border: none;
+    background: gold;
+    color: black;
+    cursor: pointer;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-button {
-  background: transparent;
-  border: 2px solid gold;
-  color: gold;
-  padding: 10px 20px;
-  margin: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
+#enterBtn:hover {
+    transform: scale(1.1);
 }
 
-button:hover {
-  background: gold;
-  color: black;
+/* Canvas estrellas */
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-#stars {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  overflow: hidden;
-  z-index: -1;
+/* Constelaciones */
+.constellation {
+    position: absolute;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transition: 1.5s ease;
 }
 
-.star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: gold;
-  animation: twinkle 3s infinite ease-in-out;
+#pisces {
+    left: 15%;
+    top: 35%;
 }
 
-@keyframes twinkle {
-  0%,100% { opacity: 0.2; }
-  50% { opacity: 1; }
+#gemini {
+    right: 15%;
+    top: 35%;
 }
 
-.gallery img {
-  width: 200px;
-  margin: 10px;
-  border: 2px solid gold;
-  border-radius: 12px;
-  transition: transform 0.3s ease;
+.constellation.show {
+    opacity: 1;
 }
 
-.gallery img:hover {
-  transform: scale(1.05);
+.constellation h2 {
+    margin: 10px 0 5px;
+    font-weight: 300;
+}
+
+.constellation p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+/* Estrella central */
+#centerStar {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 18px;
+    height: 18px;
+    background: gold;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    box-shadow: 0 0 15px gold;
+    animation: pulse 2s infinite;
+    opacity: 0;
+    transition: 1.5s ease;
+    z-index: 5;
+}
+
+#centerStar.show {
+    opacity: 1;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 10px gold; }
+    50% { box-shadow: 0 0 35px gold; }
+    100% { box-shadow: 0 0 10px gold; }
+}
+
+/* Carta */
+#letter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 85%;
+    max-width: 650px;
+    background: #f5e6c8;
+    color: #3b2e1e;
+    padding: 40px;
+    border-radius: 12px;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 0.6s ease;
+    box-shadow: 0 0 50px rgba(0,0,0,0.7);
+    font-family: Georgia, serif;
+    max-height: 85vh;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+#letter.show {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#closeBtn {
+    margin-top: 20px;
+    padding: 8px 20px;
+    border: none;
+    background: #3b2e1e;
+    color: white;
+    cursor: pointer;
+    border-radius: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="stars"></div>
+<div id="intro">
+    <h1>Bajo el mismo cielo nacieron dos estrellas…</h1>
+    <button id="enterBtn">Descubrir</button>
+</div>
 
-<section id="home" class="active">
-  <h1>Feliz cumpleaños 💖🌹</h1>
-  <p>Para la persona que cambió mi 2025 y mi forma de sentir.</p>
-  <button onclick="showSection('historia')">📅 Tiempo</button>
-  <button onclick="showSection('regalo')">🎁 Tu Regalo</button>
-  <button onclick="showSection('recuerdos')">📸 Recuerdos</button>
-</section>
+<canvas id="stars"></canvas>
 
-<section id="historia">
-  <h2>Nuestra Historia</h2>
-  <p>💞 Tiempo juntos:</p>
-  <p id="relacion"></p>
-  <p>💬 Desde que te hablé:</p>
-  <p id="conocimos"></p>
-  <button onclick="showSection('home')">Volver</button>
-</section>
+<div id="pisces" class="constellation">
+    <h2>♓ Piscis</h2>
+    <p>20 Febrero 2010</p>
+    <p>La estrella que ilumina mis días</p>
+</div>
 
-<section id="regalo">
-  <h2>Tu Regalo 💖🌹</h2>
-  <p style="max-width:500px;">
-    Gracias por llegar a mi vida y cambiarla completamente.  
-    Eres mi mejor decisión y quiero seguir creando recuerdos contigo.  
-    No solo celebro tu cumpleaños… celebro el día en que existes.
-    No es mucho pero prometo darte mas cosas en el futuro.
-  </p>
-  <button onclick="mostrarCodigo()">Abrir regalo 🎀</button>
-  <p id="codigo" style="margin-top:20px; font-size:20px; color:gold; border:1px solid gold; padding:10px; display:inline-block;"></p>
-  <button onclick="showSection('home')">Volver</button>
-</section>
+<div id="gemini" class="constellation">
+    <h2>♊ Géminis</h2>
+    <p>11 Junio 2009</p>
+    <p>El que siempre te elige</p>
+</div>
 
-<section id="recuerdos">
-  <h2>Recuerdos</h2>
-  <div class="gallery">
-   <img src="Meee.jpeg">
-   <img src="quieres ser mi novia.jpeg">
+<div id="centerStar"></div>
 
-  </div>
-  <button onclick="showSection('home')">Volver</button>
-</section>
+<div id="letter">
+    <h2>Mi niña hermosa,</h2>
+
+    <p>No sé cómo empezar esto sin que suene simple, porque lo que siento por ti no es simple.
+    Desde que llegaste a mi vida algo cambió en mí. No fue de golpe, fue poco a poco…
+    pero ahora no imagino mis días sin hablar contigo.</p>
+
+    <p>Me haces feliz de una forma que no sabía que existía. A veces estoy tranquilo
+    y de la nada sonrío porque recuerdo algo que me dijiste.
+    Y eso significa más de lo que imaginas.</p>
+
+    <p>Gracias por elegirme. Entre tantas personas, me elegiste a mí.
+    Y eso lo valoro muchísimo.</p>
+
+    <p>Cuando digo que quiero durar contigo, lo digo porque contigo me siento en paz,
+    querido y suficiente. Me ilusiona imaginar el día que podamos vernos en persona,
+    abrazarte fuerte y decirte todo esto mirándote a los ojos.</p>
+
+    <p>Y quiero que sepas algo claro: yo te elijo. Te elijo todos los días.
+    Porque no eres una parte pequeña de mi vida…
+    eres una de las razones por las que sonrío.</p>
+
+    <p><strong>Te amo. El que siempre te elige.</strong></p>
+
+    <button id="closeBtn">Cerrar</button>
+</div>
 
 <script>
-function showSection(id) {
-  document.querySelectorAll("section").forEach(sec => {
-    sec.classList.remove("active");
-  });
-  document.getElementById(id).classList.add("active");
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+
+for (let i = 0; i < 200; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5,
+        alpha: Math.random()
+    });
 }
 
-function updateCounter() {
-  const inicioRelacion = new Date("2025-12-24T18:32:00");
-  const inicioChat = new Date("2025-10-16T18:55:00");
-  const ahora = new Date();
-
-  function calcular(inicio) {
-    const diff = ahora - inicio;
-    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const horas = Math.floor(diff / (1000 * 60 * 60)) % 24;
-    const minutos = Math.floor(diff / (1000 * 60)) % 60;
-    const segundos = Math.floor(diff / 1000) % 60;
-    return `${dias} días, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
-  }
-
-  document.getElementById("relacion").textContent = calcular(inicioRelacion);
-  document.getElementById("conocimos").textContent = calcular(inicioChat);
+function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (let star of stars) {
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255,255,255," + star.alpha + ")";
+        ctx.fill();
+    }
 }
 
-setInterval(updateCounter, 1000);
-updateCounter();
-
-function mostrarCodigo() {
-  document.getElementById("codigo").textContent = "AQUI-VA-TU-CODIGO-REAL";
+function animateStars() {
+    for (let star of stars) {
+        star.alpha += (Math.random() - 0.5) * 0.05;
+        if (star.alpha < 0) star.alpha = 0;
+        if (star.alpha > 1) star.alpha = 1;
+    }
+    drawStars();
+    requestAnimationFrame(animateStars);
 }
 
-for (let i = 0; i < 100; i++) {
-  let star = document.createElement("div");
-  star.className = "star";
-  star.style.top = Math.random() * 100 + "vh";
-  star.style.left = Math.random() * 100 + "vw";
-  star.style.animationDuration = (Math.random() * 3 + 2) + "s";
-  document.getElementById("stars").appendChild(star);
-}
+animateStars();
+
+document.getElementById("enterBtn").addEventListener("click", function(){
+    document.getElementById("intro").style.opacity = "0";
+    setTimeout(() => {
+        document.getElementById("intro").style.display = "none";
+        document.getElementById("pisces").classList.add("show");
+        document.getElementById("gemini").classList.add("show");
+        document.getElementById("centerStar").classList.add("show");
+    }, 1000);
+});
+
+document.getElementById("centerStar").addEventListener("click", function(){
+    document.getElementById("letter").classList.add("show");
+});
+
+document.getElementById("closeBtn").addEventListener("click", function(){
+    document.getElementById("letter").classList.remove("show");
+});
 </script>
 
 </body>
