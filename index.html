@@ -27,11 +27,13 @@ body{
 section{
   min-height:100vh;
   display:none;
-  padding:60px 20px;
+  padding:80px 20px;
   text-align:center;
-  position:relative;
 }
-section.active{display:block;animation:fadeIn 1s ease;}
+section.active{
+  display:block;
+  animation:fadeIn 1s ease;
+}
 
 @keyframes fadeIn{
   from{opacity:0;transform:translateY(30px)}
@@ -41,12 +43,12 @@ section.active{display:block;animation:fadeIn 1s ease;}
 h1{
   font-family:'Great Vibes',cursive;
   font-size:3rem;
-  margin-bottom:30px;
+  margin-bottom:50px;
   color:var(--gold);
 }
 
 button{
-  margin-top:30px;
+  margin-top:60px;
   padding:12px 25px;
   border-radius:30px;
   border:2px solid var(--gold);
@@ -72,31 +74,32 @@ canvas{
   display:flex;
   justify-content:center;
   flex-wrap:wrap;
-  gap:20px;
+  gap:25px;
+  margin-top:40px;
 }
 
 .time-box{
   background:rgba(255,255,255,0.05);
   border:1px solid var(--gold);
-  padding:20px;
-  width:100px;
+  padding:25px;
+  width:110px;
   border-radius:20px;
-  backdrop-filter:blur(5px);
+  backdrop-filter:blur(6px);
 }
 
 .time-number{
-  font-size:26px;
+  font-size:28px;
   font-weight:bold;
   color:var(--gold);
-  transition:.3s;
 }
 
 .time-label{
   font-size:14px;
-  margin-top:5px;
+  margin-top:8px;
 }
 
-/* 🌹 FLORES */
+/* FLORES */
+
 #flores{
   position:absolute;
   bottom:0;
@@ -137,37 +140,79 @@ canvas{
   to{transform:rotate(4deg)}
 }
 
-/* ================= REGALO ================= */
+/* ================= CARTA ================= */
+
+.letter-container{
+  margin-top:40px;
+  margin-bottom:70px;
+}
+
+.letter-closed{
+  display:inline-block;
+  padding:20px 50px;
+  border:2px solid var(--gold);
+  border-radius:15px;
+  cursor:pointer;
+  font-size:1.2rem;
+  transition:.4s;
+}
+.letter-closed:hover{
+  background:var(--gold);
+  color:black;
+}
+
+.letter{
+  display:none;
+  max-width:650px;
+  margin:50px auto;
+  background:white;
+  color:black;
+  padding:50px;
+  border-radius:20px;
+  font-family:'Great Vibes',cursive;
+  font-size:1.6rem;
+  line-height:1.7;
+  animation:fadeIn 1s ease;
+}
+
+/* ================= REGALO PREMIUM ================= */
+
+.gift-container{
+  display:none;
+  margin-top:60px;
+}
 
 .gift{
-  width:180px;
-  height:180px;
-  margin:auto;
+  width:220px;
+  height:220px;
+  margin:60px auto;
   position:relative;
   cursor:pointer;
-  transition:.5s;
+  transition:.6s;
 }
 
 .box{
   width:100%;
   height:100%;
-  background:linear-gradient(135deg,#b8860b,var(--gold));
-  border-radius:15px;
+  background:linear-gradient(145deg,#d4af37,#b8860b);
+  border-radius:25px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
   position:absolute;
 }
 
 .lid{
   width:100%;
-  height:50px;
-  background:linear-gradient(135deg,#b8860b,var(--gold));
-  border-radius:15px 15px 0 0;
+  height:70px;
+  background:linear-gradient(145deg,#d4af37,#b8860b);
+  border-radius:25px 25px 0 0;
   position:absolute;
-  top:-50px;
+  top:-70px;
   transition:.6s;
+  box-shadow:0 15px 30px rgba(0,0,0,0.4);
 }
 
 .ribbonV{
-  width:25px;
+  width:35px;
   height:100%;
   background:var(--red);
   position:absolute;
@@ -177,7 +222,7 @@ canvas{
 
 .ribbonH{
   width:100%;
-  height:25px;
+  height:35px;
   background:var(--red);
   position:absolute;
   top:50%;
@@ -185,35 +230,15 @@ canvas{
 }
 
 .gift.open .lid{
-  transform:translateY(-70px) rotate(-15deg);
+  transform:translateY(-110px) rotate(-15deg);
 }
 
 #giftMessage{
   display:none;
-  margin-top:30px;
+  margin-top:50px;
   font-family:'Great Vibes',cursive;
-  font-size:1.8rem;
+  font-size:2rem;
   color:var(--gold);
-}
-
-/* ================= CARTA ================= */
-
-.letter{
-  max-width:500px;
-  margin:auto;
-  background:white;
-  color:black;
-  padding:30px;
-  border-radius:15px;
-  font-family:'Great Vibes',cursive;
-  font-size:1.5rem;
-  box-shadow:0 0 20px rgba(255,255,255,0.2);
-  animation:float 4s ease-in-out infinite alternate;
-}
-
-@keyframes float{
-  from{transform:translateY(0)}
-  to{transform:translateY(-10px)}
 }
 
 /* ================= RECUERDOS ================= */
@@ -221,13 +246,14 @@ canvas{
 .gallery{
   display:flex;
   justify-content:center;
-  gap:20px;
+  gap:40px;
   flex-wrap:wrap;
+  margin-top:40px;
 }
 
 .gallery img{
-  width:250px;
-  border-radius:15px;
+  width:280px;
+  border-radius:20px;
   border:2px solid var(--gold);
   transition:.4s;
 }
@@ -247,7 +273,7 @@ canvas{
 #modal img{
   max-width:90%;
   border:3px solid var(--gold);
-  border-radius:15px;
+  border-radius:20px;
 }
 </style>
 </head>
@@ -259,8 +285,7 @@ canvas{
 <section id="home" class="active">
 <h1>Nuestra Historia ♡</h1>
 <button onclick="go('fecha')">Fecha</button>
-<button onclick="go('regalo')">Regalo</button>
-<button onclick="go('carta')">Carta</button>
+<button onclick="go('regalo')">Carta & Regalo</button>
 <button onclick="go('recuerdos')">Recuerdos</button>
 </section>
 
@@ -281,56 +306,33 @@ canvas{
 <button onclick="go('home')">Volver</button>
 </section>
 
-<!-- REGALO -->
+<!-- CARTA + REGALO -->
 <section id="regalo">
-<h1>Tu Regalo ♡</h1>
+<h1>Nuestro Regalo ♡</h1>
 
-<div class="gift" onclick="openGift(this)">
-<div class="lid"></div>
-<div class="box"></div>
-<div class="ribbonV"></div>
-<div class="ribbonH"></div>
+<div class="letter-container">
+  <div class="letter-closed" onclick="openLetter()">
+    💌 Haz click para abrir la carta
+  </div>
+
+  <div class="letter" id="letterContent">
+    <!-- ✏️ EDITA ESTE TEXTO -->
+    Aquí puedes escribir tu mensaje personalizado.
+    Cambia este texto por lo que tú quieras decir.
+  </div>
 </div>
 
-<div id="giftMessage">
-Eres el mejor regalo que la vida me dio ♡
-</div>
+<div class="gift-container" id="giftSection">
+  <div class="gift" onclick="openGift(this)">
+    <div class="lid"></div>
+    <div class="box"></div>
+    <div class="ribbonV"></div>
+    <div class="ribbonH"></div>
+  </div>
 
-<button onclick="go('home')">Volver</button>
-</section>
-
-<!-- CARTA -->
-<section id="carta">
-<h1>Una Carta Para Ti ♡</h1>
-
-<div class="letter">
-<!-- ✏️ CAMBIA ESTE TEXTO POR LO QUE QUIERAS -->
-Mi niña hermosa,
-
-No sé cómo empezar esto sin que suene simple, porque lo que siento por ti no es simple. Desde que llegaste a mi vida algo cambió en mí. No fue de golpe, fue poco a poco… pero ahora no imagino mis días sin hablar contigo.
-
-Me haces feliz de una forma que no sabía que existía. A veces estoy tranquilo y de la nada sonrío porque recuerdo algo que me dijiste. Y eso significa más de lo que imaginas.
-
-Gracias por elegirme. De verdad. Entre tantas personas, me elegiste a mí. Y eso lo valoro muchísimo.
-
-Cuando digo que quiero durar contigo, no lo digo por decirlo. Lo digo porque contigo me siento en paz, me siento querido, me siento suficiente. Y eso no se encuentra todos los días.
-
-Me ilusiona pensar en el día que podamos vernos en persona, abrazarte fuerte y decirte todo esto mirándote a los ojos. Me ilusiona imaginar un futuro donde sigamos creciendo juntos, apoyándonos, riéndonos, cumpliendo metas.
-
-No soy perfecto, pero quiero ser mejor cada día, también por ti.
-
-Y quiero que sepas algo claro:
-yo te elijo.
-Te elijo todos los días.
-Te elijo incluso cuando el mundo se pone difícil.
-Porque si estar contigo significa cuidar lo que tenemos y construir algo bonito juntos, entonces vale la pena.
-
-No eres una parte pequeña de mi vida.
-Eres una de las razones por las que sonrío todos los días.
-
-Te amo. Y no como palabra bonita. Te amo de verdad.
-
-El que siempre te elige.
+  <div id="giftMessage">
+    ♡ Eres el mejor regalo que la vida me dio ♡
+  </div>
 </div>
 
 <button onclick="go('home')">Volver</button>
@@ -385,10 +387,19 @@ f.style.left=Math.random()*100+"%";
 flores.appendChild(f);
 }
 
+/* Carta → luego aparece regalo */
+function openLetter(){
+document.querySelector(".letter-closed").style.display="none";
+document.getElementById("letterContent").style.display="block";
+setTimeout(()=>{
+document.getElementById("giftSection").style.display="block";
+},1500);
+}
+
 /* Regalo */
 function openGift(el){
 el.classList.toggle("open");
-giftMessage.style.display="block";
+document.getElementById("giftMessage").style.display="block";
 }
 
 /* Modal */
