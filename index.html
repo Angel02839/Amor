@@ -14,19 +14,12 @@
   --gold-deep:#b8860b;
   --gold-dark:#8c6a00;
   --deep:#0d0d0d;
-  --deep-2:#111111;
-  --deep-3:#1a1a1a;
   --red:#8b0000;
-  --pink:#ff4d6d;
   --shadow-strong:0 25px 60px rgba(0,0,0,0.7);
   --shadow-soft:0 10px 30px rgba(0,0,0,0.4);
 }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box;}
 
 body{
   background:
@@ -38,6 +31,12 @@ body{
   overflow-x:hidden;
 }
 
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
 /* ===== SECCIONES ===== */
 
 section{
@@ -45,7 +44,6 @@ section{
   display:none;
   padding:100px 20px;
   text-align:center;
-  position:relative;
 }
 
 section.active{
@@ -64,20 +62,18 @@ h1{
   margin-bottom:60px;
   color:var(--gold);
   text-shadow:0 0 15px rgba(212,175,55,0.4);
-  letter-spacing:1px;
 }
 
 /* ===== BOTONES ===== */
 
 button{
-  margin-top:70px;
+  margin-top:60px;
   padding:14px 30px;
   border-radius:40px;
   border:2px solid var(--gold);
   background:transparent;
   color:var(--gold);
-  transition:.5s;
-  letter-spacing:1px;
+  transition:.4s;
 }
 
 button:hover{
@@ -87,14 +83,59 @@ button:hover{
   transform:translateY(-3px);
 }
 
-/* 🌌 ESTRELLAS */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:-1;
+/* ===== CONTADOR PREMIUM ===== */
+
+.timer-container{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:20px;
 }
 
-/* ================= CARTA 3D PREMIUM ================= */
+.time-box{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(12px);
+  padding:20px;
+  border-radius:15px;
+  width:110px;
+  box-shadow:0 0 25px rgba(212,175,55,0.2);
+  transition:.3s;
+}
+
+.time-box:hover{
+  transform:translateY(-6px);
+  box-shadow:0 0 35px rgba(212,175,55,0.5);
+}
+
+.time-number{
+  font-size:28px;
+  font-weight:bold;
+  color:var(--gold-soft);
+}
+
+.time-label{
+  font-size:14px;
+  margin-top:5px;
+}
+
+/* ===== FLORES ===== */
+
+.flower{
+  position:absolute;
+  width:10px;
+  height:10px;
+  background:var(--gold-soft);
+  border-radius:50%;
+  top:-20px;
+  animation:fall linear infinite;
+  opacity:.6;
+}
+
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
+
+/* ===== CARTA 3D ===== */
 
 .envelope-wrapper{
   margin-top:70px;
@@ -109,41 +150,17 @@ canvas{
   position:relative;
   cursor:pointer;
   transform-style:preserve-3d;
-  transition:transform 1s ease;
-}
-
-.envelope:hover{
-  transform:rotateY(5deg) rotateX(2deg);
 }
 
 .envelope-body{
   position:absolute;
   width:100%;
   height:100%;
-  background:
-    linear-gradient(145deg,var(--gold),var(--gold-deep));
+  background:linear-gradient(145deg,var(--gold),var(--gold-deep));
   border-radius:20px;
   box-shadow:var(--shadow-strong);
-  border:1px solid rgba(255,255,255,0.1);
 }
 
-/* textura dorada sutil */
-.envelope-body::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    repeating-linear-gradient(
-      45deg,
-      rgba(255,255,255,0.03),
-      rgba(255,255,255,0.03) 2px,
-      transparent 2px,
-      transparent 6px
-    );
-  border-radius:20px;
-}
-
-/* tapa */
 .flap{
   position:absolute;
   width:100%;
@@ -156,7 +173,6 @@ canvas{
   border-radius:20px 20px 0 0;
 }
 
-/* sello */
 .seal{
   position:absolute;
   width:50px;
@@ -170,59 +186,43 @@ canvas{
   transition:.6s;
 }
 
-/* carta interior */
+/* CARTA DESLIZANTE REAL */
+
 .letter{
   position:absolute;
-  width:92%;
-  height:85%;
+  width:90%;
+  height:80%;
   background:white;
   color:black;
-  left:4%;
-  top:5%;
-  border-radius:20px;
-  padding:45px;
+  left:5%;
+  top:20%;
+  border-radius:15px;
+  padding:35px;
   font-family:'Great Vibes',cursive;
-  font-size:1.7rem;
-  transform:translateY(130%);
-  transition:1.3s cubic-bezier(.77,0,.18,1);
-  box-shadow:0 20px 50px rgba(0,0,0,0.4);
+  font-size:1.6rem;
+  transform:translateY(140%);
+  transition:1.5s cubic-bezier(.77,0,.18,1);
+  box-shadow:0 20px 40px rgba(0,0,0,0.5);
+  z-index:1;
 }
 
-/* animaciones activas */
 .envelope.open .flap{
-  transform:rotateX(-190deg);
+  transform:rotateX(-180deg);
 }
 
 .envelope.open .letter{
-  transform:translateY(0);
+  transform:translateY(-20%);
 }
 
 .envelope.open .seal{
   opacity:0;
 }
 
-/* partículas */
-.sparkle{
-  position:absolute;
-  width:8px;
-  height:8px;
-  background:radial-gradient(circle,var(--gold),transparent);
-  border-radius:50%;
-  pointer-events:none;
-  animation:floatUp 2.5s ease forwards;
-}
-
-@keyframes floatUp{
-  0%{opacity:1;transform:translateY(0) scale(1)}
-  100%{opacity:0;transform:translateY(-180px) scale(0.4)}
-}
-
-/* ================= REGALO ULTRA ================= */
+/* ===== REGALO ===== */
 
 .gift-container{
   display:none;
   margin-top:120px;
-  margin-bottom:120px;
 }
 
 .gift{
@@ -232,17 +232,6 @@ canvas{
   position:relative;
   cursor:pointer;
   transition:1s;
-  transform-style:preserve-3d;
-  animation:glow 3s infinite alternate ease-in-out;
-}
-
-@keyframes glow{
-  from{filter:drop-shadow(0 0 15px var(--gold))}
-  to{filter:drop-shadow(0 0 40px var(--gold))}
-}
-
-.gift:hover{
-  transform:rotateY(8deg) rotateX(3deg);
 }
 
 .box{
@@ -251,7 +240,6 @@ canvas{
   background:linear-gradient(145deg,var(--gold),var(--gold-deep));
   border-radius:30px;
   position:absolute;
-  box-shadow:var(--shadow-strong);
 }
 
 .lid{
@@ -261,14 +249,13 @@ canvas{
   border-radius:30px 30px 0 0;
   position:absolute;
   top:-80px;
-  transition:1s cubic-bezier(.77,0,.18,1);
-  box-shadow:var(--shadow-soft);
+  transition:1s;
 }
 
 .ribbonV{
   width:40px;
   height:100%;
-  background:linear-gradient(var(--red),#4a0000);
+  background:var(--red);
   position:absolute;
   left:50%;
   transform:translateX(-50%);
@@ -277,7 +264,7 @@ canvas{
 .ribbonH{
   width:100%;
   height:40px;
-  background:linear-gradient(var(--red),#4a0000);
+  background:var(--red);
   position:absolute;
   top:50%;
   transform:translateY(-50%);
@@ -289,11 +276,54 @@ canvas{
 
 #giftMessage{
   display:none;
-  margin-top:70px;
+  margin-top:50px;
   font-family:'Great Vibes',cursive;
-  font-size:2.2rem;
+  font-size:2rem;
   color:var(--gold-soft);
-  text-shadow:0 0 20px var(--gold);
+}
+
+/* ===== GALERÍA ===== */
+
+.gallery{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+
+.gallery img{
+  width:220px;
+  border-radius:20px;
+  cursor:pointer;
+  transition:.4s;
+}
+
+.gallery img:hover{
+  transform:scale(1.05);
+}
+
+/* ===== MODAL ===== */
+
+#modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  justify-content:center;
+  align-items:center;
+}
+
+#modal img{
+  max-width:90%;
+  max-height:90%;
+  border-radius:20px;
+}
+
+/* ===== RESPONSIVE PC ===== */
+
+@media(min-width:900px){
+  section{padding:100px 20%;}
+  .gallery img{width:250px;}
 }
 </style>
 </head>
@@ -302,361 +332,155 @@ canvas{
 
 <canvas id="stars"></canvas>
 
-<!-- ================= HOME ================= -->
+<!-- HOME -->
 <section id="home" class="active">
-  <h1>Nuestra Historia ♡</h1>
-
-  <div class="home-buttons">
-    <button onclick="go('fecha')">Fecha</button>
-    <button onclick="go('regalo')">Carta & Regalo</button>
-    <button onclick="go('recuerdos')">Recuerdos</button>
-  </div>
-
-  <!-- Decoración dorada inferior -->
-  <div class="home-decoration"></div>
+<h1>Nuestra Historia ♡</h1>
+<button onclick="go('fecha')">Fecha</button>
+<button onclick="go('regalo')">Carta & Regalo</button>
+<button onclick="go('recuerdos')">Recuerdos</button>
 </section>
 
-
-<!-- ================= FECHA ================= -->
+<!-- FECHA -->
 <section id="fecha">
-  <h1>Desde que empezó todo</h1>
+<h1>Desde que empezó todo</h1>
 
-  <div class="timer-container">
-    <div class="time-box">
-      <div id="years" class="time-number">0</div>
-      <div class="time-label">Años</div>
-    </div>
-
-    <div class="time-box">
-      <div id="months" class="time-number">0</div>
-      <div class="time-label">Meses</div>
-    </div>
-
-    <div class="time-box">
-      <div id="days" class="time-number">0</div>
-      <div class="time-label">Días</div>
-    </div>
-
-    <div class="time-box">
-      <div id="hours" class="time-number">0</div>
-      <div class="time-label">Horas</div>
-    </div>
-
-    <div class="time-box">
-      <div id="minutes" class="time-number">0</div>
-      <div class="time-label">Min</div>
-    </div>
-
-    <div class="time-box">
-      <div id="seconds" class="time-number">0</div>
-      <div class="time-label">Seg</div>
-    </div>
-  </div>
-
-  <!-- Flores -->
-  <div id="flores"></div>
-
-  <button onclick="go('home')">Volver</button>
-</section>
-
-
-<!-- ================= CARTA + REGALO ================= -->
-<section id="regalo">
-  <h1>Nuestro Regalo ♡</h1>
-
-  <!-- ===== SOBRE 3D PREMIUM ===== -->
-  <div class="envelope-wrapper">
-
-    <div class="envelope" onclick="openLetter()" id="envelope">
-
-      <!-- Cuerpo del sobre -->
-      <div class="envelope-body"></div>
-
-      <!-- Tapa -->
-      <div class="flap"></div>
-
-      <!-- Sello -->
-      <div class="seal"></div>
-
-      <!-- Carta interior -->
-      <div class="letter">
-        Aquí puedes escribir tu mensaje personalizado.
-        Cambia este texto por lo que tú quieras decir.
-        Puedes hacerlo más largo, más romántico,
-        más especial… este espacio es completamente tuyo.
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- ===== REGALO ULTRA ===== -->
-  <div class="gift-container" id="giftSection">
-
-    <div class="gift" onclick="openGift(this)">
-
-      <div class="lid"></div>
-
-      <div class="box"></div>
-
-      <div class="ribbonV"></div>
-
-      <div class="ribbonH"></div>
-
-    </div>
-
-    <div id="giftMessage">
-      ♡ Eres el mejor regalo que la vida me dio ♡
-    </div>
-
-  </div>
-
-  <button onclick="go('home')">Volver</button>
-</section>
-
-
-<!-- ================= RECUERDOS ================= -->
-<section id="recuerdos">
-  <h1>Nuestros Recuerdos ♡</h1>
-
-  <div class="gallery">
-    <img src="Meee.jpeg" onclick="openModal(this.src)">
-    <img src="quieres ser mi novia.jpeg" onclick="openModal(this.src)">
-  </div>
-
-  <button onclick="go('home')">Volver</button>
-</section>
-
-
-<!-- ================= MODAL ================= -->
-<div id="modal" onclick="closeModal()">
-  <img id="modalImg">
+<div class="timer-container">
+<div class="time-box"><div id="years" class="time-number">0</div><div class="time-label">Años</div></div>
+<div class="time-box"><div id="months" class="time-number">0</div><div class="time-label">Meses</div></div>
+<div class="time-box"><div id="days" class="time-number">0</div><div class="time-label">Días</div></div>
+<div class="time-box"><div id="hours" class="time-number">0</div><div class="time-label">Horas</div></div>
+<div class="time-box"><div id="minutes" class="time-number">0</div><div class="time-label">Min</div></div>
+<div class="time-box"><div id="seconds" class="time-number">0</div><div class="time-label">Seg</div></div>
 </div>
 
-<!-- Sonido apertura -->
-<audio id="openSound"
-src="https://assets.mixkit.co/sfx/preview/mixkit-paper-slide-1530.mp3">
-</audio>
+<div id="flores"></div>
+<button onclick="go('home')">Volver</button>
+</section>
+
+<!-- REGALO -->
+<section id="regalo">
+<h1>Nuestro Regalo ♡</h1>
+
+<div class="envelope-wrapper">
+<div class="envelope" onclick="openLetter()" id="envelope">
+<div class="envelope-body"></div>
+<div class="flap"></div>
+<div class="seal"></div>
+<div class="letter">
+Aquí puedes escribir tu mensaje personalizado.
+Hazlo más romántico, más especial,
+este espacio es completamente tuyo.
+</div>
+</div>
+</div>
+
+<div class="gift-container" id="giftSection">
+<div class="gift" onclick="openGift(this)">
+<div class="lid"></div>
+<div class="box"></div>
+<div class="ribbonV"></div>
+<div class="ribbonH"></div>
+</div>
+<div id="giftMessage">♡ Eres el mejor regalo que la vida me dio ♡</div>
+</div>
+
+<button onclick="go('home')">Volver</button>
+</section>
+
+<!-- RECUERDOS -->
+<section id="recuerdos">
+<h1>Nuestros Recuerdos ♡</h1>
+<div class="gallery">
+<img src="Meee.jpeg" onclick="openModal(this.src)">
+<img src="quieres ser mi novia.jpeg" onclick="openModal(this.src)">
+</div>
+<button onclick="go('home')">Volver</button>
+</section>
+
+<div id="modal" onclick="closeModal()">
+<img id="modalImg">
+</div>
+
+<audio id="openSound" src="https://assets.mixkit.co/sfx/preview/mixkit-paper-slide-1530.mp3"></audio>
 
 <script>
-
-/* ================= NAVEGACIÓN ================= */
-
 function go(id){
-  document.querySelectorAll("section").forEach(s=>{
-    s.classList.remove("active");
-  });
-
-  document.getElementById(id).classList.add("active");
-
-  // pequeño efecto de brillo al cambiar sección
-  document.body.style.transition="background 1s ease";
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+document.getElementById(id).classList.add("active");
 }
-
-
-/* ================= CONTADOR (SE MANTIENE IGUAL) ================= */
 
 const startDate=new Date("2025-12-24T18:32:00-07:00");
-
 function update(){
-  const now=new Date();
-  let diff=Math.abs(now-startDate);
-
-  years.innerText=Math.floor(diff/(1000*60*60*24*365));
-  months.innerText=Math.floor(diff/(1000*60*60*24*30))%12;
-  days.innerText=Math.floor(diff/(1000*60*60*24))%30;
-  hours.innerText=Math.floor(diff/(1000*60*60))%24;
-  minutes.innerText=Math.floor(diff/(1000*60))%60;
-  seconds.innerText=Math.floor(diff/1000)%60;
+const now=new Date();
+let diff=Math.abs(now-startDate);
+years.innerText=Math.floor(diff/(1000*60*60*24*365));
+months.innerText=Math.floor(diff/(1000*60*60*24*30))%12;
+days.innerText=Math.floor(diff/(1000*60*60*24))%30;
+hours.innerText=Math.floor(diff/(1000*60*60))%24;
+minutes.innerText=Math.floor(diff/(1000*60))%60;
+seconds.innerText=Math.floor(diff/1000)%60;
 }
-
-setInterval(update,1000);
-update();
-
-
-/* ================= FLORES (SE MANTIENE) ================= */
+setInterval(update,1000);update();
 
 for(let i=0;i<25;i++){
-  let f=document.createElement("div");
-  f.className="flower";
-  f.style.left=Math.random()*100+"%";
-  f.style.animationDuration=(3+Math.random()*3)+"s";
-  flores.appendChild(f);
+let f=document.createElement("div");
+f.className="flower";
+f.style.left=Math.random()*100+"%";
+f.style.animationDuration=(3+Math.random()*3)+"s";
+flores.appendChild(f);
 }
-
-
-/* ================= CARTA 3D CINEMÁTICA ================= */
 
 let letterOpened=false;
-
 function openLetter(){
-
-  if(letterOpened) return;
-  letterOpened=true;
-
-  const envelope=document.getElementById("envelope");
-  const sound=document.getElementById("openSound");
-
-  envelope.classList.add("open");
-
-  // sonido suave
-  sound.volume=0.6;
-  sound.play();
-
-  // partículas doradas dinámicas
-  createSparkles(40);
-
-  // pequeña vibración física
-  envelope.style.animation="shake 0.4s ease";
-
-  setTimeout(()=>{
-    envelope.style.animation="";
-  },400);
-
-  // aparición dramática del regalo
-  setTimeout(()=>{
-    const gift=document.getElementById("giftSection");
-    gift.style.display="block";
-    gift.style.opacity="0";
-    gift.style.transform="translateY(40px)";
-    gift.style.transition="all 1.2s ease";
-
-    setTimeout(()=>{
-      gift.style.opacity="1";
-      gift.style.transform="translateY(0)";
-    },100);
-
-  },1800);
+if(letterOpened) return;
+letterOpened=true;
+document.getElementById("envelope").classList.add("open");
+document.getElementById("openSound").play();
+setTimeout(()=>{
+let gift=document.getElementById("giftSection");
+gift.style.display="block";
+},2000);
 }
-
-
-/* ================= PARTÍCULAS AVANZADAS ================= */
-
-function createSparkles(amount){
-
-  for(let i=0;i<amount;i++){
-
-    let spark=document.createElement("div");
-    spark.className="sparkle";
-
-    spark.style.left=Math.random()*window.innerWidth+"px";
-    spark.style.top=(window.innerHeight*0.5+Math.random()*100)+"px";
-
-    spark.style.animationDuration=(1.5+Math.random()*1.5)+"s";
-
-    document.body.appendChild(spark);
-
-    setTimeout(()=>{
-      spark.remove();
-    },2500);
-  }
-}
-
-
-/* ================= REGALO ULTRA ================= */
 
 let giftOpened=false;
-
 function openGift(el){
-
-  if(giftOpened) return;
-  giftOpened=true;
-
-  el.classList.add("open");
-
-  // efecto de luz al abrir
-  el.style.transition="1s";
-  el.style.transform="scale(1.05)";
-
-  setTimeout(()=>{
-    el.style.transform="scale(1)";
-  },800);
-
-  // partículas extra al abrir regalo
-  createSparkles(60);
-
-  // mensaje con fade elegante
-  const message=document.getElementById("giftMessage");
-  message.style.display="block";
-  message.style.opacity="0";
-  message.style.transform="translateY(20px)";
-  message.style.transition="all 1.2s ease";
-
-  setTimeout(()=>{
-    message.style.opacity="1";
-    message.style.transform="translateY(0)";
-  },200);
+if(giftOpened) return;
+giftOpened=true;
+el.classList.add("open");
+let msg=document.getElementById("giftMessage");
+msg.style.display="block";
 }
-
-
-/* ================= MODAL (SE MANTIENE) ================= */
 
 function openModal(src){
-  modal.style.display="flex";
-  modal.style.animation="fadeIn 0.8s ease";
-  modalImg.src=src;
+modal.style.display="flex";
+modalImg.src=src;
 }
-
 function closeModal(){
-  modal.style.display="none";
+modal.style.display="none";
 }
-
-
-/* ================= ESTRELLAS MEJORADAS ================= */
 
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
-
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
-
 let stars=[];
-
 for(let i=0;i<200;i++){
-  stars.push({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    r:Math.random()*2,
-    speed:Math.random()*0.3
-  });
+stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,speed:Math.random()*0.3});
 }
-
 function drawStars(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-
-  stars.forEach(s=>{
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fillStyle="rgba(255,255,255,0.8)";
-    ctx.fill();
-
-    s.y+=s.speed;
-
-    if(s.y>canvas.height){
-      s.y=0;
-      s.x=Math.random()*canvas.width;
-    }
-  });
-
-  requestAnimationFrame(drawStars);
+ctx.clearRect(0,0,canvas.width,canvas.height);
+stars.forEach(s=>{
+ctx.beginPath();
+ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+ctx.fillStyle="rgba(255,255,255,0.8)";
+ctx.fill();
+s.y+=s.speed;
+if(s.y>canvas.height){s.y=0;s.x=Math.random()*canvas.width;}
+});
+requestAnimationFrame(drawStars);
 }
-
 drawStars();
-
-
-/* ================= ANIMACIÓN SHAKE ================= */
-
-const style=document.createElement("style");
-style.innerHTML=`
-@keyframes shake{
-  0%{transform:translateX(0)}
-  25%{transform:translateX(-3px)}
-  50%{transform:translateX(3px)}
-  75%{transform:translateX(-2px)}
-  100%{transform:translateX(0)}
-}
-`;
-document.head.appendChild(style);
-
 </script>
+
+</body>
+</html>
