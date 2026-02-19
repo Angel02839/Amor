@@ -16,7 +16,6 @@
   --deep:#0d0d0d;
   --red:#8b0000;
   --shadow-strong:0 25px 60px rgba(0,0,0,0.7);
-  --shadow-soft:0 10px 30px rgba(0,0,0,0.4);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -37,8 +36,6 @@ canvas{
   z-index:-1;
 }
 
-/* ===== SECCIONES ===== */
-
 section{
   min-height:100vh;
   display:none;
@@ -58,13 +55,10 @@ section.active{
 
 h1{
   font-family:'Great Vibes',cursive;
-  font-size:3.2rem;
+  font-size:3rem;
   margin-bottom:60px;
   color:var(--gold);
-  text-shadow:0 0 15px rgba(212,175,55,0.4);
 }
-
-/* ===== BOTONES ===== */
 
 button{
   margin-top:60px;
@@ -74,16 +68,15 @@ button{
   background:transparent;
   color:var(--gold);
   transition:.4s;
+  cursor:pointer;
 }
 
 button:hover{
   background:var(--gold);
   color:black;
-  box-shadow:0 0 25px var(--gold);
-  transform:translateY(-3px);
 }
 
-/* ===== CONTADOR PREMIUM ===== */
+/* CONTADOR */
 
 .timer-container{
   display:flex;
@@ -94,17 +87,9 @@ button:hover{
 
 .time-box{
   background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(12px);
   padding:20px;
   border-radius:15px;
   width:110px;
-  box-shadow:0 0 25px rgba(212,175,55,0.2);
-  transition:.3s;
-}
-
-.time-box:hover{
-  transform:translateY(-6px);
-  box-shadow:0 0 35px rgba(212,175,55,0.5);
 }
 
 .time-number{
@@ -113,12 +98,7 @@ button:hover{
   color:var(--gold-soft);
 }
 
-.time-label{
-  font-size:14px;
-  margin-top:5px;
-}
-
-/* ===== FLORES ===== */
+/* FLORES */
 
 .flower{
   position:absolute;
@@ -135,7 +115,7 @@ button:hover{
   to{transform:translateY(110vh);}
 }
 
-/* ===== CARTA 3D ===== */
+/* CARTA */
 
 .envelope-wrapper{
   margin-top:70px;
@@ -158,7 +138,6 @@ button:hover{
   height:100%;
   background:linear-gradient(145deg,var(--gold),var(--gold-deep));
   border-radius:20px;
-  box-shadow:var(--shadow-strong);
 }
 
 .flap{
@@ -168,25 +147,19 @@ button:hover{
   background:linear-gradient(145deg,var(--gold),var(--gold-dark));
   clip-path:polygon(0 0,100% 0,50% 70%);
   transform-origin:top;
-  transition:1.3s cubic-bezier(.77,0,.18,1);
-  z-index:4;
-  border-radius:20px 20px 0 0;
+  transition:1.3s;
 }
 
 .seal{
   position:absolute;
   width:50px;
   height:50px;
-  background:radial-gradient(circle,var(--red),#4a0000);
+  background:var(--red);
   border-radius:50%;
   top:95px;
   left:155px;
-  z-index:5;
-  box-shadow:0 0 25px rgba(139,0,0,0.8);
   transition:.6s;
 }
-
-/* CARTA DESLIZANTE REAL */
 
 .letter{
   position:absolute;
@@ -199,14 +172,11 @@ button:hover{
   border-radius:15px;
   padding:35px;
   font-family:'Great Vibes',cursive;
-  font-size:1.5rem;
+  font-size:1.4rem;
   line-height:1.6;
   overflow-y:auto;
-  transform:translateY(0);
   opacity:0;
-  transition:opacity 0.8s ease, transform 1s cubic-bezier(.77,0,.18,1);
-  box-shadow:0 20px 40px rgba(0,0,0,0.5);
-  z-index:1;
+  transition:1s;
 }
 
 .envelope.open .flap{
@@ -222,6 +192,110 @@ button:hover{
   opacity:0;
 }
 
+/* REGALO */
+
+.gift-container{
+  display:none;
+  margin-top:40px;
+}
+
+.gift{
+  position:relative;
+  width:120px;
+  height:120px;
+  margin:40px auto;
+  cursor:pointer;
+}
+
+.box{
+  width:100%;
+  height:100%;
+  background:var(--gold);
+  border-radius:10px;
+  position:absolute;
+}
+
+.lid{
+  width:110%;
+  height:35px;
+  background:var(--gold-deep);
+  position:absolute;
+  top:-35px;
+  left:-5%;
+  border-radius:10px;
+  transition:.6s;
+}
+
+.ribbonV{
+  position:absolute;
+  width:20px;
+  height:100%;
+  background:var(--red);
+  left:50%;
+  transform:translateX(-50%);
+}
+
+.ribbonH{
+  position:absolute;
+  height:20px;
+  width:100%;
+  background:var(--red);
+  top:40%;
+}
+
+.gift.open .lid{
+  transform:translateY(-40px) rotate(-10deg);
+}
+
+#giftMessage{
+  display:none;
+  margin-top:20px;
+  font-family:'Great Vibes',cursive;
+  font-size:1.6rem;
+  color:var(--gold);
+}
+
+/* RECUERDOS */
+
+.gallery{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  flex-wrap:wrap;
+}
+
+.gallery img{
+  width:190px;
+  height:250px;
+  object-fit:cover;
+  border-radius:20px;
+  transition:.4s;
+  cursor:pointer;
+  border:2px solid rgba(212,175,55,0.3);
+}
+
+.gallery img:hover{
+  transform:scale(1.05);
+  border:2px solid var(--gold);
+}
+
+/* MODAL */
+
+#modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+#modal img{
+  max-width:90%;
+  max-height:85%;
+  border-radius:20px;
+}
 </style>
 </head>
 
@@ -237,191 +311,59 @@ button:hover{
 <button onclick="go('recuerdos')">Recuerdos</button>
 </section>
 
-<!-- FECHA -->
-<section id="fecha">
-<h1>Desde que empezó todo</h1>
-
-<div class="timer-container">
-<div class="time-box"><div id="years" class="time-number">0</div><div class="time-label">Años</div></div>
-<div class="time-box"><div id="months" class="time-number">0</div><div class="time-label">Meses</div></div>
-<div class="time-box"><div id="days" class="time-number">0</div><div class="time-label">Días</div></div>
-<div class="time-box"><div id="hours" class="time-number">0</div><div class="time-label">Horas</div></div>
-<div class="time-box"><div id="minutes" class="time-number">0</div><div class="time-label">Min</div></div>
-<div class="time-box"><div id="seconds" class="time-number">0</div><div class="time-label">Seg</div></div>
+<!-- RECUERDOS -->
+<section id="recuerdos">
+<h1>Nuestros Recuerdos ♡</h1>
+<div class="gallery">
+<img src="Meee.jpeg" onclick="openModal(this.src)">
+<img src="quieres ser mi novia.jpeg" onclick="openModal(this.src)">
 </div>
-
-<div id="flores"></div>
 <button onclick="go('home')">Volver</button>
 </section>
 
-<!-- REGALO -->
-<section id="regalo">
-<h1>Nuestro Regalo ♡</h1>
-
-<div class="envelope-wrapper">
-<div class="envelope" onclick="openLetter()" id="envelope">
-<div class="envelope-body"></div>
-<div class="flap"></div>
-<div class="seal"></div>
-<div class="letter">
-Mi niña hermosa,<br><br>
-
-No sé cómo empezar esto sin que suene simple, porque lo que siento por ti no es simple. Desde que llegaste a mi vida algo cambió en mí. No fue de golpe, fue poco a poco… pero ahora no imagino mis días sin hablar contigo.<br><br>
-
-Me haces feliz de una forma que no sabía que existía. A veces estoy tranquilo y de la nada sonrío porque recuerdo algo que me dijiste. Y eso significa más de lo que imaginas.<br><br>
-
-Gracias por elegirme. De verdad. Entre tantas personas, me elegiste a mí. Y eso lo valoro muchísimo.<br><br>
-
-Cuando digo que quiero durar contigo, no lo digo por decirlo. Lo digo porque contigo me siento en paz, me siento querido, me siento suficiente. Y eso no se encuentra todos los días.<br><br>
-
-Me ilusiona pensar en el día que podamos vernos en persona, abrazarte fuerte y decirte todo esto mirándote a los ojos. Me ilusiona imaginar un futuro donde sigamos creciendo juntos, apoyándonos, riéndonos, cumpliendo metas.<br><br>
-
-No soy perfecto, pero quiero ser mejor cada día, también por ti.<br><br>
-
-Y quiero que sepas algo claro:<br>
-yo te elijo.<br>
-Te elijo todos los días.<br>
-Te elijo incluso cuando el mundo se pone difícil.<br>
-Porque si estar contigo significa cuidar lo que tenemos y construir algo bonito juntos, entonces vale la pena.<br><br>
-
-No eres una parte pequeña de mi vida.<br>
-Eres una de las razones por las que sonrío todos los días.<br><br>
-
-Te amo. Y no como palabra bonita. Te amo de verdad.
+<div id="modal" onclick="closeModal()">
+<img id="modalImg">
 </div>
 
-</div>
-</div>
-</div>
-
-<div class="gift-container" id="giftSection">
-<div class="gift" onclick="openGift(this)">
-<div class="lid"></div>
-<div class="box"></div>
-<div class="ribbonV"></div>
-<div class="ribbonH"></div>
-</div>
-<div id="giftMessage">♡ Eres el mejor regalo que la vida me dio ♡</div>
-</div>
-
-<button onclick="go('home')">Volver</button>
-</section>
-
-/* ===== RECUERDOS ===== */
-
-.gallery{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:30px;
-  flex-wrap:wrap;
-  margin-bottom:80px;
-}
-
-.gallery img{
-  width:220px;
-  height:280px;
-  object-fit:cover;
-  border-radius:20px;
-  box-shadow:0 15px 35px rgba(0,0,0,0.6);
-  transition:0.4s ease;
-  cursor:pointer;
-  border:2px solid rgba(212,175,55,0.3);
-}
-
-.gallery img:hover{
-  transform:translateY(-8px) scale(1.05);
-  box-shadow:0 20px 45px rgba(212,175,55,0.4);
-  border:2px solid var(--gold);
-}
-
-/* Modal */
-#modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.85);
-  display:none;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-}
-
-#modal img{
-  max-width:90%;
-  max-height:85%;
-  border-radius:20px;
-  box-shadow:0 20px 50px rgba(0,0,0,0.8);
-}
-
+<script>
 function go(id){
 document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
-const startDate=new Date("2025-12-24T18:32:00-07:00");
-function update(){
-const now=new Date();
-let diff=Math.abs(now-startDate);
-years.innerText=Math.floor(diff/(1000*60*60*24*365));
-months.innerText=Math.floor(diff/(1000*60*60*24*30))%12;
-days.innerText=Math.floor(diff/(1000*60*60*24))%30;
-hours.innerText=Math.floor(diff/(1000*60*60))%24;
-minutes.innerText=Math.floor(diff/(1000*60))%60;
-seconds.innerText=Math.floor(diff/1000)%60;
-}
-setInterval(update,1000);update();
-
-for(let i=0;i<25;i++){
-let f=document.createElement("div");
-f.className="flower";
-f.style.left=Math.random()*100+"%";
-f.style.animationDuration=(3+Math.random()*3)+"s";
-flores.appendChild(f);
-}
-
-let letterOpened=false;
-function openLetter(){
-if(letterOpened) return;
-letterOpened=true;
-document.getElementById("envelope").classList.add("open");
-document.getElementById("openSound").play();
-setTimeout(()=>{
-let gift=document.getElementById("giftSection");
-gift.style.display="block";
-},2000);
-}
-
-let giftOpened=false;
-function openGift(el){
-if(giftOpened) return;
-giftOpened=true;
-el.classList.add("open");
-let msg=document.getElementById("giftMessage");
-msg.style.display="block";
-}
+const modal=document.getElementById("modal");
+const modalImg=document.getElementById("modalImg");
 
 function openModal(src){
 modal.style.display="flex";
 modalImg.src=src;
 }
+
 function closeModal(){
 modal.style.display="none";
 }
 
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
+
+function resizeCanvas(){
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize",resizeCanvas);
+
 let stars=[];
 for(let i=0;i<200;i++){
 stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,speed:Math.random()*0.3});
 }
+
 function drawStars(){
 ctx.clearRect(0,0,canvas.width,canvas.height);
 stars.forEach(s=>{
 ctx.beginPath();
 ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-ctx.fillStyle="rgba(255,255,255,0.8)";
+ctx.fillStyle="white";
 ctx.fill();
 s.y+=s.speed;
 if(s.y>canvas.height){s.y=0;s.x=Math.random()*canvas.width;}
