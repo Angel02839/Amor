@@ -257,14 +257,17 @@ button:hover{
 /* Tapa */
 .lid{
   width:100%;
-  height:60px;
+  height:80px;
   background:linear-gradient(145deg,var(--gold),var(--gold-dark));
-  border-radius:25px 25px 0 0;
+  border-radius:30px 30px 0 0;
   position:absolute;
-  top:-60px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.5);
+  top:0; /* ahora está pegada a la caja */
+  transform-origin:top center;
+  box-shadow:0 15px 25px rgba(0,0,0,0.4);
   transition:1s cubic-bezier(.77,0,.18,1);
+  z-index:2;
 }
+
 
 /* Moño rediseñado */
 .ribbonV{
@@ -294,7 +297,7 @@ button:hover{
 
 /* Apertura elegante */
 .gift.open .lid{
-  transform:translateY(-120px) rotateX(40deg);
+  transform:rotateX(-120deg);
 }
 
 #giftMessage{
