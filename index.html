@@ -307,23 +307,52 @@ Te amo. Y no como palabra bonita. Te amo de verdad.
 <button onclick="go('home')">Volver</button>
 </section>
 
-<!-- RECUERDOS -->
-<section id="recuerdos">
-<h1>Nuestros Recuerdos ♡</h1>
-<div class="gallery">
-<img src="Meee.jpeg" onclick="openModal(this.src)">
-<img src="quieres ser mi novia.jpeg" onclick="openModal(this.src)">
-</div>
-<button onclick="go('home')">Volver</button>
-</section>
+/* ===== RECUERDOS ===== */
 
-<div id="modal" onclick="closeModal()">
-<img id="modalImg">
-</div>
+.gallery{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:30px;
+  flex-wrap:wrap;
+  margin-bottom:80px;
+}
 
-<audio id="openSound" src="https://assets.mixkit.co/sfx/preview/mixkit-paper-slide-1530.mp3"></audio>
+.gallery img{
+  width:220px;
+  height:280px;
+  object-fit:cover;
+  border-radius:20px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.6);
+  transition:0.4s ease;
+  cursor:pointer;
+  border:2px solid rgba(212,175,55,0.3);
+}
 
-<script>
+.gallery img:hover{
+  transform:translateY(-8px) scale(1.05);
+  box-shadow:0 20px 45px rgba(212,175,55,0.4);
+  border:2px solid var(--gold);
+}
+
+/* Modal */
+#modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+#modal img{
+  max-width:90%;
+  max-height:85%;
+  border-radius:20px;
+  box-shadow:0 20px 50px rgba(0,0,0,0.8);
+}
+
 function go(id){
 document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
