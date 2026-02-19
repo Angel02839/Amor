@@ -222,7 +222,7 @@ button:hover{
   opacity:0;
 }
 
-/* ===== REGALO WOW ===== */
+/* ===== REGALO PROPORCIONADO ===== */
 
 .gift-container{
   display:none;
@@ -232,89 +232,65 @@ button:hover{
 
 .gift{
   width:220px;
-  height:220px;
+  height:180px;
   margin:60px auto;
   position:relative;
   cursor:pointer;
-  perspective:1400px;
 }
 
-/* Caja base */
+/* Caja */
 .box{
-  width:100%;
-  height:100%;
-  background:linear-gradient(145deg,#f8df88,var(--gold-deep));
-  border-radius:25px;
   position:absolute;
   bottom:0;
-  box-shadow:0 35px 70px rgba(0,0,0,0.7);
-  overflow:hidden;
+  width:100%;
+  height:120px;
+  background:linear-gradient(145deg,#f4d06f,var(--gold-deep));
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.6);
   z-index:1;
-}
-
-/* Luz interior */
-.box::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at center,rgba(255,215,0,0.6),transparent 60%);
-  opacity:0;
-  transition:0.8s ease;
 }
 
 /* Tapa */
 .lid{
-  width:100%;
-  height:80px;
-  background:linear-gradient(145deg,var(--gold),var(--gold-dark));
-  border-radius:25px 25px 0 0;
   position:absolute;
-  top:-60px;
-  left:0;
+  top:0;
+  width:100%;
+  height:70px;
+  background:linear-gradient(145deg,var(--gold),var(--gold-dark));
+  border-radius:20px;
   transform-origin:bottom center;
-  transition:1s cubic-bezier(.77,0,.18,1);
-  box-shadow:0 20px 40px rgba(0,0,0,0.6);
+  transition:0.8s ease;
+  box-shadow:0 12px 25px rgba(0,0,0,0.5);
   z-index:3;
 }
 
-/* Listones */
+/* Listón vertical */
 .ribbonV{
-  width:30px;
-  height:100%;
-  background:linear-gradient(to bottom,#c40000,#700000);
   position:absolute;
+  bottom:0;
   left:50%;
   transform:translateX(-50%);
-  border-radius:15px;
+  width:24px;
+  height:120px;
+  background:#8b0000;
+  border-radius:10px;
   z-index:2;
 }
 
+/* Listón horizontal */
 .ribbonH{
-  width:100%;
-  height:30px;
-  background:linear-gradient(to right,#c40000,#700000);
   position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  border-radius:15px;
+  top:55px;
+  width:100%;
+  height:24px;
+  background:#8b0000;
+  border-radius:10px;
   z-index:2;
 }
 
-/* Apertura WOW */
+/* Animación */
 .gift.open .lid{
-  transform:rotateX(-115deg) translateY(-10px);
-}
-
-/* Activar brillo al abrir */
-.gift.open .box::after{
-  opacity:1;
-  animation:glowPulse 2s infinite;
-}
-
-@keyframes glowPulse{
-  0%{transform:scale(1);opacity:0.6;}
-  50%{transform:scale(1.1);opacity:0.9;}
-  100%{transform:scale(1);opacity:0.6;}
+  transform:rotateX(-100deg);
 }
 
 /* Mensaje */
@@ -322,15 +298,8 @@ button:hover{
   display:none;
   margin-top:40px;
   font-family:'Great Vibes',cursive;
-  font-size:2.3rem;
+  font-size:2.2rem;
   color:var(--gold-soft);
-  text-shadow:0 0 20px rgba(255,215,0,0.7);
-  animation:fadeMessage 1s ease forwards;
-}
-
-@keyframes fadeMessage{
-  from{opacity:0;transform:translateY(25px);}
-  to{opacity:1;transform:translateY(0);}
 }
 
 /* ===== GALERÍA ===== */
