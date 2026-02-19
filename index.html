@@ -15,7 +15,6 @@
   --gold-dark:#8c6a00;
   --deep:#0d0d0d;
   --red:#8b0000;
-  --shadow-strong:0 25px 60px rgba(0,0,0,0.7);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -45,11 +44,11 @@ section{
 
 section.active{
   display:block;
-  animation:fadeIn 1.2s ease;
+  animation:fadeIn 1s ease;
 }
 
 @keyframes fadeIn{
-  from{opacity:0;transform:translateY(40px)}
+  from{opacity:0;transform:translateY(30px)}
   to{opacity:1;transform:translateY(0)}
 }
 
@@ -61,14 +60,14 @@ h1{
 }
 
 button{
-  margin-top:60px;
+  margin-top:40px;
   padding:14px 30px;
   border-radius:40px;
   border:2px solid var(--gold);
   background:transparent;
   color:var(--gold);
-  transition:.4s;
   cursor:pointer;
+  transition:.3s;
 }
 
 button:hover{
@@ -93,7 +92,7 @@ button:hover{
 }
 
 .time-number{
-  font-size:28px;
+  font-size:26px;
   font-weight:bold;
   color:var(--gold-soft);
 }
@@ -119,7 +118,7 @@ button:hover{
 
 .envelope-wrapper{
   margin-top:70px;
-  margin-bottom:120px;
+  margin-bottom:80px;
   perspective:1600px;
 }
 
@@ -147,7 +146,7 @@ button:hover{
   background:linear-gradient(145deg,var(--gold),var(--gold-dark));
   clip-path:polygon(0 0,100% 0,50% 70%);
   transform-origin:top;
-  transition:1.3s;
+  transition:1.2s;
 }
 
 .seal{
@@ -170,7 +169,7 @@ button:hover{
   left:5%;
   top:20%;
   border-radius:15px;
-  padding:35px;
+  padding:30px;
   font-family:'Great Vibes',cursive;
   font-size:1.4rem;
   line-height:1.6;
@@ -303,7 +302,6 @@ button:hover{
 
 <canvas id="stars"></canvas>
 
-<!-- HOME -->
 <section id="home" class="active">
 <h1>Nuestra Historia ♡</h1>
 <button onclick="go('fecha')">Fecha</button>
@@ -311,7 +309,47 @@ button:hover{
 <button onclick="go('recuerdos')">Recuerdos</button>
 </section>
 
-<!-- RECUERDOS -->
+<section id="fecha">
+<h1>Desde que empezó todo</h1>
+<div class="timer-container">
+<div class="time-box"><div id="years" class="time-number">0</div><div>Años</div></div>
+<div class="time-box"><div id="months" class="time-number">0</div><div>Meses</div></div>
+<div class="time-box"><div id="days" class="time-number">0</div><div>Días</div></div>
+<div class="time-box"><div id="hours" class="time-number">0</div><div>Horas</div></div>
+<div class="time-box"><div id="minutes" class="time-number">0</div><div>Min</div></div>
+<div class="time-box"><div id="seconds" class="time-number">0</div><div>Seg</div></div>
+</div>
+<div id="flores"></div>
+<button onclick="go('home')">Volver</button>
+</section>
+
+<section id="regalo">
+<h1>Nuestro Regalo ♡</h1>
+
+<div class="envelope-wrapper">
+<div class="envelope" onclick="openLetter()" id="envelope">
+<div class="envelope-body"></div>
+<div class="flap"></div>
+<div class="seal"></div>
+<div class="letter">
+Te amo. Y no como palabra bonita. Te amo de verdad.
+</div>
+</div>
+</div>
+
+<div class="gift-container" id="giftSection">
+<div class="gift" onclick="openGift(this)">
+<div class="lid"></div>
+<div class="box"></div>
+<div class="ribbonV"></div>
+<div class="ribbonH"></div>
+</div>
+<div id="giftMessage">♡ Eres el mejor regalo que la vida me dio ♡</div>
+</div>
+
+<button onclick="go('home')">Volver</button>
+</section>
+
 <section id="recuerdos">
 <h1>Nuestros Recuerdos ♡</h1>
 <div class="gallery">
@@ -331,6 +369,50 @@ document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
 document.getElementById(id).classList.add("active");
 }
 
+/* CONTADOR */
+const startDate=new Date("2025-12-24T18:32:00-07:00");
+function update(){
+const now=new Date();
+let diff=Math.abs(now-startDate);
+document.getElementById("years").innerText=Math.floor(diff/(1000*60*60*24*365));
+document.getElementById("months").innerText=Math.floor(diff/(1000*60*60*24*30))%12;
+document.getElementById("days").innerText=Math.floor(diff/(1000*60*60*24))%30;
+document.getElementById("hours").innerText=Math.floor(diff/(1000*60*60))%24;
+document.getElementById("minutes").innerText=Math.floor(diff/(1000*60))%60;
+document.getElementById("seconds").innerText=Math.floor(diff/1000)%60;
+}
+setInterval(update,1000);
+update();
+
+/* FLORES */
+const flores=document.getElementById("flores");
+for(let i=0;i<25;i++){
+let f=document.createElement("div");
+f.className="flower";
+f.style.left=Math.random()*100+"%";
+f.style.animationDuration=(3+Math.random()*3)+"s";
+flores.appendChild(f);
+}
+
+/* CARTA */
+let letterOpened=false;
+function openLetter(){
+if(letterOpened) return;
+letterOpened=true;
+document.getElementById("envelope").classList.add("open");
+setTimeout(()=>{document.getElementById("giftSection").style.display="block";},2000);
+}
+
+/* REGALO */
+let giftOpened=false;
+function openGift(el){
+if(giftOpened) return;
+giftOpened=true;
+el.classList.add("open");
+document.getElementById("giftMessage").style.display="block";
+}
+
+/* MODAL */
 const modal=document.getElementById("modal");
 const modalImg=document.getElementById("modalImg");
 
@@ -338,11 +420,11 @@ function openModal(src){
 modal.style.display="flex";
 modalImg.src=src;
 }
-
 function closeModal(){
 modal.style.display="none";
 }
 
+/* ESTRELLAS */
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
 
