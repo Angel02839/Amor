@@ -222,7 +222,7 @@ button:hover{
   opacity:0;
 }
 
-/* ===== REGALO ESTILO 🎁 ===== */
+/* ===== REGALO ESTILO EMOJI REAL 🎁 ===== */
 
 .gift-container{
   display:none;
@@ -232,7 +232,7 @@ button:hover{
 
 .gift{
   width:200px;
-  height:200px;
+  height:190px;
   margin:60px auto;
   position:relative;
   cursor:pointer;
@@ -243,50 +243,51 @@ button:hover{
   position:absolute;
   bottom:0;
   width:100%;
-  height:150px;
-  background:#d62828; /* rojo fuerte */
-  border-radius:15px;
+  height:140px;
+  background:#d62828; /* rojo principal */
+  border-radius:12px;
   box-shadow:0 20px 40px rgba(0,0,0,0.5);
+  z-index:1;
 }
 
-/* Tapa roja */
+/* Tapa roja (abre hacia arriba normal) */
 .lid{
   position:absolute;
   top:0;
   width:100%;
   height:70px;
-  background:#d62828;
-  border-radius:15px 15px 0 0;
-  transform-origin:bottom center;
+  background:#c81f1f; /* rojo un poco más oscuro */
+  border-radius:12px 12px 0 0;
+  transform-origin:top center;
   transition:0.6s ease;
   z-index:3;
 }
 
-/* Listón vertical amarillo */
+/* Cinta vertical amarilla */
 .ribbonV{
   position:absolute;
   bottom:0;
   left:50%;
   transform:translateX(-50%);
-  width:30px;
-  height:150px;
+  width:26px;
+  height:140px;
   background:#ffcc00;
   z-index:2;
 }
 
-/* Listón horizontal amarillo */
+/* Cinta horizontal amarilla */
 .ribbonH{
   position:absolute;
-  top:60px;
+  top:58px;
   width:100%;
-  height:30px;
+  height:26px;
   background:#ffcc00;
   z-index:2;
 }
 
-/* Apertura */
+/* Apertura natural hacia arriba */
 .gift.open .lid{
-  transform:rotateX(-100deg);
+  transform:rotateX(120deg);
 }
 
 /* Mensaje */
@@ -298,10 +299,6 @@ button:hover{
   color:var(--gold-soft);
 }
 
-/* ===== GALERÍA ===== */
-
-.gallery{
-  display:flex;
   flex-wrap:wrap;
   justify-content:center;
   gap:20px;
